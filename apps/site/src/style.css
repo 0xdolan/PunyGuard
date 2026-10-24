@@ -48,6 +48,16 @@ body {
   }
 }
 
+/* Wide screens: the inspector makes room for the detail drawer instead of hiding columns under it. */
+.drawer-shift {
+  transition: padding-right 0.2s ease-out;
+}
+@media (min-width: 1024px) {
+  html.drawer-open .drawer-shift {
+    padding-right: 420px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     animation: none;
