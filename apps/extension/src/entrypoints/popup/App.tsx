@@ -59,7 +59,7 @@ export default function App() {
   return (
     <div className="popup-shell flex flex-col bg-background text-foreground">
       <header className="flex items-center gap-3 border-b border-border px-4 py-3">
-        <img src="/icon-32.png" alt="" width={28} height={28} className="shrink-0" />
+        <img src="/icons/icon-32.png" alt="" width={28} height={28} className="shrink-0" />
         <div className="min-w-0 flex-1">
           <h1 className="text-sm font-extrabold tracking-tight">PunyGuard</h1>
           <p className="truncate font-mono text-[11px] text-muted-foreground">

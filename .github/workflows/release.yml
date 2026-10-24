@@ -36,6 +36,6 @@ jobs:
           draft: true
           generate_release_notes: true
           files: |
-            extension/.output/*.zip
+            apps/extension/.output/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

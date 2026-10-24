@@ -7,7 +7,7 @@
 [![Site](https://img.shields.io/badge/site-GitHub%20Pages-111111)](https://0xdolan.github.io/PunyGuard/)
 
 <p align="center">
-  <img src="assets/logo.svg" alt="PunyGuard" width="160" />
+  <img src="assets/brand/logo.svg" alt="PunyGuard" width="160" />
 </p>
 
 PunyGuard is an open-source cross-browser extension (Chrome, Edge, Firefox, Safari) that inspects hostnames on every page — including embedded links, scripts, and iframes — for Unicode lookalikes and mixed-script phishing tells. Analysis runs **entirely on-device** so your browsing data never leaves your machine during live checks.
@@ -50,15 +50,21 @@ pnpm test
 pnpm docs:dev     # Marketing site (GitHub Pages source)
 ```
 
-Load the unpacked build from `extension/.output/chrome-mv3` (or Firefox output) in your browser’s extension developer mode.
+Load the unpacked build from `apps/extension/.output/chrome-mv3` (or Firefox output) in your browser’s extension developer mode.
 
 ## Repository layout
 
 ```
-extension/   Browser extension (WXT + React)
-docs/        GitHub Pages site
-assets/      Brand mark (keypad icon)
-.github/     CI/CD & Pages workflows
+apps/
+  extension/      Browser extension (WXT + React)
+    public/icons/ Toolbar & store icons
+    src/          Entrypoints, components, lib
+    tests/        Vitest unit + Playwright smoke tests
+  site/           GitHub Pages marketing site & inspector
+packages/
+  core/           Detection engine shared by extension and site
+assets/brand/     Brand mark source files
+.github/          CI/CD & Pages workflows
 ```
 
 ## License

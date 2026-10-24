@@ -4,7 +4,6 @@ import { resolve } from 'node:path';
 export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   srcDir: 'src',
-  publicDir: 'assets',
   manifest: {
     name: 'PunyGuard',
     description:
@@ -22,10 +21,10 @@ export default defineConfig({
       open_in_tab: true,
     },
     icons: {
-      '16': 'icon-16.png',
-      '32': 'icon-32.png',
-      '48': 'icon-48.png',
-      '128': 'icon-128.png',
+      '16': 'icons/icon-16.png',
+      '32': 'icons/icon-32.png',
+      '48': 'icons/icon-48.png',
+      '128': 'icons/icon-128.png',
     },
     browser_specific_settings: {
       gecko: {
@@ -38,7 +37,7 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
-        '@punyguard/core': resolve(__dirname, '../packages/core/src/index.ts'),
+        '@punyguard/core': resolve(__dirname, '../../packages/core/src/index.ts'),
       },
     },
     optimizeDeps: {

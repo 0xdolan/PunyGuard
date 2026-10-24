@@ -5,7 +5,7 @@ import {
   convertIdn,
   encodeToAscii,
   scanHostnames,
-} from '../../../packages/core/src/index';
+} from '@punyguard/core';
 
 test('engine classifies known lookalike patterns', () => {
   const paypal = analyzeHostname('раypal.com');
