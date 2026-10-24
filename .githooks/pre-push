@@ -1,0 +1,22 @@
+#!/bin/sh
+# Project rule: run the full local CI before anything reaches GitHub.
+# Installed by `pnpm install` (the prepare script sets core.hooksPath).
+# Bypass only in an emergency: git push --no-verify
+set -eu
+
+# Deleting a remote ref pushes no code, so there is nothing to verify.
+only_deletes=1
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$local_sha" in
+    *[!0]*) only_deletes=0 ;;
+  esac
+done
+[ "$only_deletes" = 1 ] && exit 0
+
+echo "pre-push: running local CI (pnpm verify)..."
+if ! pnpm verify; then
+  echo ""
+  echo "pre-push: local CI failed, so nothing was pushed. Fix the errors above and push again."
+  exit 1
+fi
+echo "pre-push: local CI passed."
