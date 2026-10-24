@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "idna-uts46-hx": "^6.2.4",
-    "unicode-properties": "^1.4.1"
+    "unicode-properties": "^2.0.1"
   },
   "devDependencies": {
     "typescript": "^5.8.3"
