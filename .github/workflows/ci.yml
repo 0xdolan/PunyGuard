@@ -86,8 +86,6 @@ jobs:
     name: Safari Xcode project
     needs: quality
     runs-on: macos-latest
-    # Informational until the converter step has a green run on GitHub's macOS image.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
