@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 460" width="100%" height="100%">
+  <!-- Top Row Dots -->
+  <circle cx="80" cy="80" r="45" fill="#000000" />
+  <circle cx="210" cy="80" r="45" fill="#000000" />
+  <circle cx="340" cy="80" r="45" fill="#000000" />
+
+  <!-- Middle Row Dots -->
+  <circle cx="80" cy="210" r="45" fill="#000000" />
+  <circle cx="340" cy="210" r="45" fill="#000000" />
+
+  <!-- Bottom Left Dot -->
+  <circle cx="80" cy="340" r="45" fill="#000000" />
+
+  <!-- Integrated Hand/Pointer Shape -->
+  <path d="M 165,210 
+           A 45,45 0 0,1 255,210 
+           L 255,295 
+           L 345,295 
+           A 45,45 0 0,1 390,340 
+           L 390,395 
+           A 45,45 0 0,1 345,440 
+           L 210,440 
+           A 45,45 0 0,1 165,395 
+           Z" fill="#000000" />
+</svg>
