@@ -34,9 +34,12 @@ jobs:
       - name: Build store packages
         run: pnpm zip:all
 
-      - name: Checksums
-        working-directory: apps/extension/.output
-        run: sha256sum *.zip > SHA256SUMS.txt
+      # Stage outside WXT's dot-directory, which upload tools may skip.
+      - name: Stage files and checksums
+        run: |
+          mkdir -p release
+          cp apps/extension/.output/*.zip release/
+          cd release && sha256sum *.zip > SHA256SUMS.txt && ls -l
 
       - name: Draft GitHub Release
         uses: softprops/action-gh-release@v2
@@ -46,6 +49,6 @@ jobs:
           draft: true
           prerelease: ${{ contains(github.ref_name, '-') }}
           files: |
-            apps/extension/.output/*.zip
-            apps/extension/.output/SHA256SUMS.txt
+            release/*.zip
+            release/SHA256SUMS.txt
           fail_on_unmatched_files: true

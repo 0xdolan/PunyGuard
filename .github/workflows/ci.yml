@@ -79,6 +79,8 @@ jobs:
           name: punyguard-${{ matrix.browser }}
           path: apps/extension/.output/*.zip
           if-no-files-found: error
+          # The zips live in WXT's dot-directory, which upload-artifact skips by default.
+          include-hidden-files: true
 
   safari-xcode:
     name: Safari Xcode project
