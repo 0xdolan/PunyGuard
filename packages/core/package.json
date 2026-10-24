@@ -1,0 +1,18 @@
+{
+  "name": "@punyguard/core",
+  "version": "0.0.2",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "idna-uts46-hx": "^6.2.4",
+    "unicode-properties": "^1.4.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
