@@ -39,7 +39,7 @@ jobs:
         run: sha256sum *.zip > SHA256SUMS.txt
 
       - name: Draft GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: PunyGuard ${{ github.ref_name }}
           body_path: ${{ runner.temp }}/notes.md
