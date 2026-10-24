@@ -137,12 +137,13 @@ export function extractHostnamesFromHtml(html: string): string[] {
 
   // Bare IDN / xn-- mentions in text. Only non-ASCII or Punycode candidates count:
   // dotted ASCII in scripts (`t.substr`, `window.location`) is code, not a host.
+  // The leading boundary is consumed rather than a lookbehind, which Safari < 16.4 rejects.
   const idnRe = new RegExp(
-    `(?<![\\p{L}\\p{M}\\p{N}\\p{Cf}_.-])(?:${LABEL_SRC}\\.)+${LABEL_SRC}`,
+    `(?:^|[^\\p{L}\\p{M}\\p{N}\\p{Cf}_.-])((?:${LABEL_SRC}\\.)+${LABEL_SRC})`,
     'gu',
   );
   while ((m = idnRe.exec(html)) !== null) {
-    const candidate = m[0];
+    const candidate = m[1]!;
     if (!/[^\x00-\x7f]|xn--/i.test(candidate)) continue;
     const normalized = normalizeHostname(candidate);
     if (normalized) found.add(normalized);

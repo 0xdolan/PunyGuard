@@ -70,12 +70,12 @@ Prereleases use `x.y.z-beta.N` (or `-rc.N`). Stores only accept dotted numbers, 
 7. Merge `main` back into `develop`.
 8. Upload the store packages from the release:
 
-   | Store                                                            | File                                                                          |
-   | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-   | Chrome Web Store (Brave, Opera, Vivaldi users install from here) | `punyguardextension-x.y.z-chrome.zip`                                         |
-   | Microsoft Edge Add-ons                                           | `punyguardextension-x.y.z-edge.zip`                                           |
-   | Firefox Add-ons (AMO)                                            | `punyguardextension-x.y.z-firefox.zip` plus `…-sources.zip` for source review |
-   | Safari (App Store Connect)                                       | On macOS: `pnpm safari:xcode`, then archive and upload in Xcode               |
+   | Store                                                            | File                                                                 |
+   | ---------------------------------------------------------------- | -------------------------------------------------------------------- |
+   | Chrome Web Store (Brave, Opera, Vivaldi users install from here) | `punyguard-x.y.z-chrome.zip`                                         |
+   | Microsoft Edge Add-ons                                           | `punyguard-x.y.z-edge.zip`                                           |
+   | Firefox Add-ons (AMO)                                            | `punyguard-x.y.z-firefox.zip` plus `…-sources.zip` for source review |
+   | Safari (App Store Connect)                                       | On macOS: `pnpm safari:xcode`, then archive and upload in Xcode      |
 
 ## GitHub setup (one time)
 
