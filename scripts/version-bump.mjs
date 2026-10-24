@@ -49,14 +49,20 @@ if (!unreleased) fail([`${CHANGELOG} "Unreleased" is empty — record the change
 
 // Local calendar date, YYYY-MM-DD.
 const date = new Date().toLocaleDateString('en-CA');
-let updated = changelog.replace(/^## \[Unreleased\].*$/m, `## [Unreleased]\n\n## [${version}] — ${date}`);
+let updated = changelog.replace(
+  /^## \[Unreleased\].*$/m,
+  `## [Unreleased]\n\n## [${version}] — ${date}`,
+);
 
 // Link references: Unreleased compares from the new tag; the new version compares from the previous tag.
 const prevTagged = new RegExp(`^\\[${current.replace(/\./g, '\\.')}\\]: `, 'm').test(changelog);
 const versionLink = prevTagged
   ? `${REPO_URL}/compare/v${current}...v${version}`
   : `${REPO_URL}/releases/tag/v${version}`;
-updated = updated.replace(/^\[Unreleased\]: .*$/m, `[Unreleased]: ${REPO_URL}/compare/v${version}...HEAD\n[${version}]: ${versionLink}`);
+updated = updated.replace(
+  /^\[Unreleased\]: .*$/m,
+  `[Unreleased]: ${REPO_URL}/compare/v${version}...HEAD\n[${version}]: ${versionLink}`,
+);
 if (!/^\[Unreleased\]: /m.test(updated))
   updated = `${updated.trimEnd()}\n\n[Unreleased]: ${REPO_URL}/compare/v${version}...HEAD\n[${version}]: ${versionLink}\n`;
 write(CHANGELOG, updated);
