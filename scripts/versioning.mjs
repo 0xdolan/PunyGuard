@@ -17,7 +17,8 @@ export const PACKAGE_FILES = [
 export const CHANGELOG = 'CHANGELOG.md';
 
 // SemVer 2.0 without build metadata; store manifests cannot carry it.
-export const SEMVER_RE = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$/;
+export const SEMVER_RE =
+  /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$/;
 
 export const read = (file) => readFileSync(resolve(ROOT, file), 'utf8');
 export const write = (file, text) => writeFileSync(resolve(ROOT, file), text);
@@ -35,7 +36,10 @@ export function changelogSection(changelog, version) {
   if (start === -1) return null;
   let end = lines.findIndex((l, i) => i > start && (/^## \[/.test(l) || /^\[[^\]]+\]: /.test(l)));
   if (end === -1) end = lines.length;
-  return lines.slice(start + 1, end).join('\n').trim();
+  return lines
+    .slice(start + 1, end)
+    .join('\n')
+    .trim();
 }
 
 export function fail(errors) {

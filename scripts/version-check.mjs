@@ -35,7 +35,8 @@ for (const file of PACKAGE_FILES) {
 }
 
 const changelog = read(CHANGELOG);
-if (!/^## \[Unreleased\]/m.test(changelog)) errors.push(`${CHANGELOG} is missing "## [Unreleased]"`);
+if (!/^## \[Unreleased\]/m.test(changelog))
+  errors.push(`${CHANGELOG} is missing "## [Unreleased]"`);
 const notes = changelogSection(changelog, version);
 if (notes === null) errors.push(`${CHANGELOG} has no "## [${version}]" section`);
 else if (!notes) errors.push(`${CHANGELOG} section for ${version} is empty`);
