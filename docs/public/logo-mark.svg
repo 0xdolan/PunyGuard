@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PunyGuard">
+  
+  <g transform="translate(46, 26) scale(1)">
+    
+  <!-- Top Row Dots -->
+  <circle cx="80" cy="80" r="45" fill="#FF1A1A" />
+  <circle cx="210" cy="80" r="45" fill="#FF1A1A" />
+  <circle cx="340" cy="80" r="45" fill="#FF1A1A" />
+
+  <!-- Middle Row Dots -->
+  <circle cx="80" cy="210" r="45" fill="#FF1A1A" />
+  <circle cx="340" cy="210" r="45" fill="#FF1A1A" />
+
+  <!-- Bottom Left Dot -->
+  <circle cx="80" cy="340" r="45" fill="#FF1A1A" />
+
+  <!-- Integrated Hand/Pointer Shape -->
+  <path d="M 165,210 
+           A 45,45 0 0,1 255,210 
+           L 255,295 
+           L 345,295 
+           A 45,45 0 0,1 390,340 
+           L 390,395 
+           A 45,45 0 0,1 345,440 
+           L 210,440 
+           A 45,45 0 0,1 165,395 
+           Z" fill="#FF1A1A" />
+
+  </g>
+</svg>
