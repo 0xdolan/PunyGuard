@@ -41,6 +41,10 @@ export interface DomainParts {
   subdomains: string[];
 }
 
+/** A hostname label: letters, marks, digits, format controls (kept for invisible-char detection), `_`, `-`. */
+const LABEL_SRC = String.raw`[\p{L}\p{M}\p{N}\p{Cf}_-]+`;
+const HOSTNAME_RE = new RegExp(`^(?:${LABEL_SRC}\\.)+${LABEL_SRC}$`, 'u');
+
 export function normalizeHostname(input: string): string | null {
   try {
     let host = input.trim().toLowerCase();
@@ -50,10 +54,10 @@ export function normalizeHostname(input: string): string | null {
     } else if (host.includes('/')) {
       host = host.split('/')[0] ?? host;
     }
-    host = host.replace(/\.$/, '');
+    host = host.replace(/:\d+$/, '').replace(/\.$/, '');
     if (host.startsWith('[') && host.endsWith(']')) return null; // IPv6
     if (/^\d{1,3}(\.\d{1,3}){3}$/.test(host)) return null; // IPv4
-    if (!host.includes('.')) return null;
+    if (host.length > 253 || !HOSTNAME_RE.test(host)) return null;
     return host;
   } catch {
     return null;
@@ -131,10 +135,15 @@ export function extractHostnamesFromHtml(html: string): string[] {
     found.add(m[1]!.toLowerCase());
   }
 
-  // Bare IDN / xn-- mentions in text
-  const idnRe = /\b((?:xn--[a-z0-9-]+|[^\s/?:#]+\.)+[^\s/?:#.]{2,})\b/gi;
+  // Bare IDN / xn-- mentions in text. Only non-ASCII or Punycode candidates count:
+  // dotted ASCII in scripts (`t.substr`, `window.location`) is code, not a host.
+  const idnRe = new RegExp(
+    `(?<![\\p{L}\\p{M}\\p{N}\\p{Cf}_.-])(?:${LABEL_SRC}\\.)+${LABEL_SRC}`,
+    'gu',
+  );
   while ((m = idnRe.exec(html)) !== null) {
-    const candidate = m[1]!.toLowerCase().replace(/[),.;]+$/, '');
+    const candidate = m[0];
+    if (!/[^\x00-\x7f]|xn--/i.test(candidate)) continue;
     const normalized = normalizeHostname(candidate);
     if (normalized) found.add(normalized);
   }

@@ -7,6 +7,7 @@ import {
   scanHostnames,
   deconstructDomain,
   extractHostnamesFromHtml,
+  normalizeHostname,
 } from '@punyguard/core';
 
 describe('analyzeHostname', () => {
@@ -117,5 +118,25 @@ describe('domain utils', () => {
     expect(hosts).toContain('evil.example');
     expect(hosts).toContain('cdn.lookalike.test');
     expect(hosts).toContain('xn--pple-43d.com');
+  });
+
+  it('ignores minified script text that only looks dotted', () => {
+    const html = `<script>function n(t,e){return t.length<=e?t:t.substr(0,e)+"…"}function r(){window.location.href}</script>`;
+    expect(extractHostnamesFromHtml(html)).toEqual([]);
+  });
+
+  it('still extracts bare IDN mentions from script and text', () => {
+    const html = `<script>var u="раypal.com";</script><p>Visit xn--pple-43d.com today.</p>`;
+    const hosts = extractHostnamesFromHtml(html);
+    expect(hosts).toContain('раypal.com');
+    expect(hosts).toContain('xn--pple-43d.com');
+  });
+
+  it('rejects strings that are not hostname-shaped', () => {
+    expect(normalizeHostname('t.substr(0,e)+"…"}function')).toBeNull();
+    expect(normalizeHostname('a..b.com')).toBeNull();
+    expect(normalizeHostname('Example.COM.')).toBe('example.com');
+    expect(normalizeHostname('example.com:8443')).toBe('example.com');
+    expect(normalizeHostname('раypal.com')).toBe('раypal.com');
   });
 });
