@@ -2,7 +2,7 @@
 
 **Local-first protection against IDN homograph attacks, lookalike domains, and phishing script spoofing.**
 
-[![CI](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml/badge.svg)](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml)
+[![CI](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/badge/version-0.0.2-FF1A1A)](CHANGELOG.md)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Site](https://img.shields.io/badge/site-GitHub%20Pages-111111)](https://0xdolan.github.io/PunyGuard/)
