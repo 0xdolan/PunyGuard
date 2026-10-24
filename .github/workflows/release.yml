@@ -3,40 +3,49 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
+  ci:
+    name: CI
+    uses: ./.github/workflows/ci.yml
+
   release:
+    name: GitHub Release
+    needs: ci
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: ./.github/actions/setup
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
+      - name: Tag matches version and changelog
+        run: pnpm version:check --tag "${GITHUB_REF_NAME}" --notes "${RUNNER_TEMP}/notes.md"
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
+      # Chrome (also Brave/Opera/Vivaldi), Edge, Firefox (+ AMO sources zip), Safari
+      - name: Build store packages
+        run: pnpm zip:all
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
-      - run: pnpm typecheck
-      # Chrome (also Brave/Opera), Edge, Firefox (+ AMO sources zip), Safari
-      - run: pnpm zip:all
+      - name: Checksums
+        working-directory: apps/extension/.output
+        run: sha256sum *.zip > SHA256SUMS.txt
 
       - name: Draft GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          name: PunyGuard ${{ github.ref_name }}
+          body_path: ${{ runner.temp }}/notes.md
           draft: true
-          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
           files: |
             apps/extension/.output/*.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            apps/extension/.output/SHA256SUMS.txt
+          fail_on_unmatched_files: true

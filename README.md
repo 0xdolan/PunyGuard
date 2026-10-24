@@ -3,6 +3,8 @@
 **Local-first protection against IDN homograph attacks, lookalike domains, and phishing script spoofing.**
 
 [![CI](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml/badge.svg)](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml)
+[![Version](https://img.shields.io/github/package-json/v/0xdolan/PunyGuard?label=version)](CHANGELOG.md)
+[![Release](https://img.shields.io/github/v/release/0xdolan/PunyGuard?include_prereleases)](https://github.com/0xdolan/PunyGuard/releases)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Site](https://img.shields.io/badge/site-GitHub%20Pages-111111)](https://0xdolan.github.io/PunyGuard/)
 
@@ -61,10 +63,15 @@ pnpm dev            # Chrome with live reload
 pnpm dev:firefox    # Firefox with live reload
 pnpm build:all      # Chrome, Edge, Firefox, Safari builds
 pnpm zip:all        # Store-ready zips (+ Firefox sources zip for AMO)
-pnpm lint && pnpm typecheck && pnpm test
+pnpm verify         # Everything CI checks, locally
 pnpm test:e2e       # Playwright smoke tests
-pnpm docs:dev       # Marketing site (GitHub Pages source)
+pnpm site:dev       # Site with live reload → http://localhost:5173/PunyGuard/
+pnpm site:preview   # Production Pages build → http://localhost:4173/PunyGuard/
 ```
+
+## Releases & versioning
+
+The version lives in the root `package.json` and is propagated to every package, the manifest, the popup and options footers, and the site. `pnpm version:bump <patch|minor|major>` bumps it and dates the changelog, and pushing a `vX.Y.Z` tag drafts a GitHub Release with every store zip. See [CHANGELOG.md](CHANGELOG.md) and [docs/RELEASING.md](docs/RELEASING.md), which also covers the one-time GitHub Actions and Pages setup.
 
 ## Repository layout
 
@@ -78,6 +85,8 @@ apps/
 packages/
   core/           Detection engine shared by extension and site
 assets/brand/     Brand mark source files
+docs/             Maintainer docs (releasing, GitHub setup)
+scripts/          Version bump & consistency checks
 .github/          CI/CD & Pages workflows
 ```
 

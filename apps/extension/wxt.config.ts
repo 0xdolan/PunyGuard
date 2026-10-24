@@ -11,7 +11,7 @@ export default defineConfig({
     name: 'PunyGuard',
     description:
       'Local-first protection against IDN homograph attacks, lookalike domains, and phishing script spoofing.',
-    version: '0.0.2',
+    // `version` comes from package.json; WXT moves prerelease tags into `version_name`.
     homepage_url: 'https://0xdolan.github.io/PunyGuard/',
     permissions: ['storage', 'tabs', 'scripting', 'activeTab'],
     host_permissions: ['<all_urls>'],

@@ -5,9 +5,13 @@ on:
     branches: [main, develop, 'release/**', 'hotfix/**']
   pull_request:
     branches: [main, develop]
+  workflow_call:
+
+permissions:
+  contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -16,21 +20,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
 
       - name: Format check
         run: pnpm format:check
+
+      - name: Version consistency
+        run: pnpm version:check
 
       - name: Lint
         run: pnpm lint
@@ -41,6 +37,9 @@ jobs:
       - name: Unit tests
         run: pnpm test
 
+      - name: Smoke tests
+        run: pnpm test:e2e
+
   build:
     name: Build (${{ matrix.browser }})
     needs: quality
@@ -48,75 +47,40 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Brave and other Chromium browsers install the chrome build.
+        # Brave, Opera, and Vivaldi install the chrome build.
         browser: [chrome, edge, firefox, safari]
     steps:
       - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
 
       - name: Zip extension
         run: pnpm --filter @punyguard/extension exec wxt zip -b ${{ matrix.browser }}
 
       - name: Lint Firefox package (AMO rules)
         if: matrix.browser == 'firefox'
-        run: npx --yes web-ext@8 lint --source-dir apps/extension/.output/firefox-mv3
+        run: pnpm lint:amo
 
       - uses: actions/upload-artifact@v4
         with:
           name: punyguard-${{ matrix.browser }}
-          path: |
-            apps/extension/.output/*.zip
-            apps/extension/.output/${{ matrix.browser }}-mv3/
+          path: apps/extension/.output/*.zip
+          if-no-files-found: error
 
   safari-xcode:
     name: Safari Xcode project
     needs: quality
     runs-on: macos-latest
+    # Informational until the converter step has a green run on GitHub's macOS image.
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
       - run: pnpm safari:xcode
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: punyguard-safari-xcode
-          path: apps/extension/safari/
-
-  docs:
+  site:
     name: Build site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm docs:build
-      - uses: actions/upload-artifact@v4
-        with:
-          name: punyguard-site
-          path: apps/site/dist
+      - uses: ./.github/actions/setup
+      - run: pnpm site:build
