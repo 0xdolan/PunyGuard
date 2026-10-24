@@ -1,0 +1,32 @@
+{
+  "name": "punyguard",
+  "version": "0.0.2",
+  "private": true,
+  "description": "Local-first IDN homograph & phishing lookalike detection for every browser",
+  "license": "GPL-3.0-or-later",
+  "author": "0xdolan",
+  "packageManager": "pnpm@10.12.1",
+  "scripts": {
+    "dev": "pnpm --filter @punyguard/extension dev",
+    "build": "pnpm --filter @punyguard/extension build",
+    "build:firefox": "pnpm --filter @punyguard/extension build:firefox",
+    "build:safari": "pnpm --filter @punyguard/extension build:safari",
+    "test": "pnpm --filter @punyguard/extension test",
+    "test:e2e": "pnpm --filter @punyguard/extension test:e2e",
+    "lint": "pnpm --filter @punyguard/extension lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,css,md,html}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,css,md,html}\"",
+    "docs:dev": "pnpm --filter @punyguard/docs dev",
+    "docs:build": "pnpm --filter @punyguard/docs build",
+    "zip": "pnpm --filter @punyguard/extension zip"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@vitejs/plugin-react": "^4.5.2"
+    }
+  }
+}
