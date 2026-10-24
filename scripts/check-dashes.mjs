@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Project rule: no en dash (U+2013) or em dash (U+2014) anywhere, in tracked
+// Project rule: no en dash (U+2013) or em dash (U+2014) anywhere, in repo
 // files or the commit message. Use a hyphen, a colon, commas, or "to" instead.
 // Write the code point as an escape if a dash is ever needed as data.
 import { execFileSync } from 'node:child_process';
@@ -14,7 +14,9 @@ const BINARY = /\.(png|jpe?g|gif|ico|webp|woff2?|ttf|otf|zip)$/i;
 const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });
 const errors = [];
 
-for (const file of git('ls-files', '-z').split('\0').filter(Boolean)) {
+for (const file of git('ls-files', '-z', '--cached', '--others', '--exclude-standard')
+  .split('\0')
+  .filter(Boolean)) {
   if (BINARY.test(file)) continue;
   let text;
   try {
