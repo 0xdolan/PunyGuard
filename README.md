@@ -33,8 +33,27 @@ Attackers register domains that look identical to brands you trust by swapping L
 - Search characters by name, `U+`, hex, decimal, block, or script; copy list to clipboard
 - Extension **analyzer** tab + GitHub Pages inspector (`#/inspect`)
 - Live page recon + toolbar threat badge (green / amber / red)
-- Redesigned popup (padded, Inspect tab), options, Lucide icons, JetBrains Mono + Noto Sans
+- Popup with page results and an Inspect tab, plus a settings page (on/off, badge, iframe scanning, theme)
+- Light and dark themes
 - GPL-3.0 open source
+
+## Install
+
+PunyGuard is not in the browser stores yet. Until it is, install a release build:
+
+1. Download the zip for your browser from [Releases](https://github.com/0xdolan/PunyGuard/releases) once one is published, or build it yourself (see [Develop](#develop)).
+2. Unzip it, then load the folder as an unpacked extension using the steps in [Browser support](#browser-support).
+
+## Privacy & permissions
+
+Every check runs locally. PunyGuard makes no network requests during analysis and collects no data (the Firefox manifest declares `data_collection_permissions: none`).
+
+| Permission                 | Why it is needed                                                     |
+| -------------------------- | -------------------------------------------------------------------- |
+| `<all_urls>` (host access) | Read the hostnames of links, scripts, and iframes on pages you visit |
+| `tabs`, `activeTab`        | Know which page the popup and toolbar badge belong to                |
+| `scripting`                | Run the page scanner                                                 |
+| `storage`                  | Save your settings                                                   |
 
 ## Stack
 
@@ -52,7 +71,9 @@ All targets ship Manifest V3 from one codebase.
 | Firefox | 140+         | `pnpm build:firefox`        | `apps/extension/.output/firefox-mv3`   | `about:debugging` → This Firefox → Load Temporary Add-on               |
 | Safari  | 15.4+        | `pnpm safari:xcode` (macOS) | `apps/extension/safari/` Xcode project | Run the app in Xcode, then enable it in Safari → Settings → Extensions |
 
-Brave and other Chromium browsers (Opera, Vivaldi) use the Chrome build and install from the Chrome Web Store. Safari requires macOS with Xcode; `pnpm safari:xcode` builds `safari-mv3` and wraps it with `safari-web-extension-converter`.
+Brave and other Chromium browsers (Opera, Vivaldi) use the Chrome build. Safari requires macOS with Xcode; `pnpm safari:xcode` builds `safari-mv3` and wraps it with `safari-web-extension-converter`.
+
+When loading unpacked, select the folder that contains `manifest.json`. File pickers hide `.output` because it starts with a dot: press Ctrl+H to show it, or paste the path.
 
 ## Develop
 
@@ -85,9 +106,15 @@ packages/
   core/           Detection engine shared by extension and site
 assets/brand/     Brand mark source files
 docs/             Maintainer docs (releasing, GitHub setup)
-scripts/          Version bump & consistency checks
+scripts/          Version, changelog, and dash checks
 .github/          CI/CD & Pages workflows
 ```
+
+## Contributing & security
+
+Contributions are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md) for the branch flow and checks. `main` is protected, so changes land through pull requests with all CI checks passing.
+
+Please report vulnerabilities, including detection bypasses, privately as described in [SECURITY.md](SECURITY.md).
 
 ## License
 
