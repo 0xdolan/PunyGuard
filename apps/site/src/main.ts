@@ -8,6 +8,8 @@ import {
   type CharDetail,
 } from '@punyguard/core';
 
+declare const __APP_VERSION__: string;
+
 const app = document.querySelector<HTMLDivElement>('#app')!;
 const base = import.meta.env.BASE_URL;
 
@@ -68,7 +70,7 @@ function homePage() {
     <footer class="border-t border-white/10 py-8 text-center text-sm text-[var(--muted)]">
       Made ♥ by <a class="text-white hover:underline" href="https://github.com/0xdolan">0xdolan</a>
       · <a class="text-white hover:underline" href="https://github.com/0xdolan/PunyGuard">Source</a>
-      · v0.0.2
+      · v${__APP_VERSION__}
     </footer>
   </div>`;
 }

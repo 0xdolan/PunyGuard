@@ -2,33 +2,31 @@
 
 All notable changes to PunyGuard are documented here.
 
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [docs/RELEASING.md](docs/RELEASING.md) for the release process.
+
 ## [Unreleased]
+
+## [0.0.2] — 2026-10-23
+
+First public release.
 
 ### Added
 
-- Edge, Safari, and Brave build targets alongside Chrome and Firefox, all on MV3
+- MV3 extension for Chrome, Edge, Brave, Firefox (140+), and Safari (15.4+) from one WXT + React 19 codebase
+- Local UTS #39–inspired homoglyph, mixed-script, invisible-character, and Punycode detection engine
+- Popup (31rem × max 34rem), options page, analyzer tab, and toolbar badge (green / amber / red)
+- Content-script page recon for links, scripts, iframes, and IDN mentions in page HTML
+- Unicode inspector with per-character `U+`, name, block, script, and escapes
+- GitHub Pages site with the inspector (`apps/site/`)
 - `pnpm safari:xcode` to wrap the Safari build in an Xcode project
-- `typecheck` scripts and a per-browser CI build matrix with AMO lint
-
-### Changed
-
-- Workspace reorganized into `apps/extension`, `apps/site`, and `packages/core`
-- Firefox and Safari now build as MV3 (WXT previously defaulted them to MV2)
-- Firefox minimum version raised to 140 to declare `data_collection_permissions`
+- CI (format, version, lint, typecheck, tests, per-browser builds, AMO lint), tag-driven release drafts, and Pages deploys
+- `pnpm version:bump` / `pnpm version:check` to keep the version identical across packages, manifest, UI, and changelog
+- Keypad brand mark
 
 ### Fixed
 
-- Options page now opens in a tab as configured
-- Firefox-only manifest keys no longer leak into Chromium builds
+- Minified script text such as `t.substr(0,e)+"…"}function` is no longer reported as a hostname
+- Lookalike domains inside JavaScript strings are extracted without surrounding quotes
 
-## [0.0.2] — 2026-10-22
-
-### Added
-
-- Initial MV3 cross-browser extension scaffold (WXT + React 19 + Tailwind + DaisyUI)
-- Local UTS #39–inspired homoglyph / mixed-script / Punycode detection engine
-- Popup (320×545), options page, toolbar badge states (green / amber / red)
-- Content-script page recon for links, scripts, iframes, and HTML hosts
-- GitHub Pages marketing site (`apps/site/`)
-- CI, release draft, and Pages workflows
-- Infinity brand mark (no shield)
+[Unreleased]: https://github.com/0xdolan/PunyGuard/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/0xdolan/PunyGuard/releases/tag/v0.0.2

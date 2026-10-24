@@ -14,15 +14,16 @@ Thank you for helping people stay safer online.
 
 1. Branch from `develop` (or `main` for hotfixes).
 2. Keep PRs focused; include tests for engine changes.
-3. CI must pass (format, lint, typecheck, unit tests, per-browser builds).
-4. Tag releases as `vX.Y.Z` to draft GitHub Releases with zipped artifacts.
+3. Use [Conventional Commits](https://www.conventionalcommits.org/). CI must pass; run `pnpm verify` locally first.
+4. Add user-facing changes to `CHANGELOG.md` under `## [Unreleased]`.
+5. Releases, versioning, and tags follow [docs/RELEASING.md](docs/RELEASING.md).
 
 ## Local setup
 
 ```bash
 pnpm install
-pnpm dev
-pnpm test
+pnpm dev        # Chrome with live reload
+pnpm verify     # everything CI checks
 ```
 
 ## Code standards
@@ -30,7 +31,8 @@ pnpm test
 - TypeScript strict mode
 - No remote network calls in the live detection path
 - Prefer clear threat reasons over opaque scores
-- Match existing UI patterns (320×545 popup, DaisyUI themes)
+- Match existing UI patterns (31rem × max 34rem popup, DaisyUI themes)
+- Never hard-code the version; use `APP_VERSION` (extension) or `__APP_VERSION__` (site)
 
 ## License
 

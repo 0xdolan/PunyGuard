@@ -19,11 +19,16 @@
     "typecheck": "pnpm -r typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,css,md,html}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,json,css,md,html}\"",
-    "docs:dev": "pnpm --filter @punyguard/docs dev",
-    "docs:build": "pnpm --filter @punyguard/docs build",
+    "site:dev": "pnpm --filter @punyguard/site dev",
+    "site:build": "pnpm --filter @punyguard/site build",
+    "site:preview": "pnpm site:build && pnpm --filter @punyguard/site preview",
     "zip": "pnpm --filter @punyguard/extension zip",
     "zip:all": "pnpm --filter @punyguard/extension zip:all",
-    "safari:xcode": "pnpm --filter @punyguard/extension safari:xcode"
+    "safari:xcode": "pnpm --filter @punyguard/extension safari:xcode",
+    "version:check": "node scripts/version-check.mjs",
+    "version:bump": "node scripts/version-bump.mjs",
+    "verify": "pnpm install --frozen-lockfile && pnpm format:check && pnpm version:check && pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e && pnpm zip:all && pnpm lint:amo && pnpm site:build",
+    "lint:amo": "npx --yes web-ext@8 lint --source-dir apps/extension/.output/firefox-mv3"
   },
   "devDependencies": {
     "prettier": "^3.5.3",
@@ -33,5 +38,14 @@
     "overrides": {
       "@vitejs/plugin-react": "^4.5.2"
     }
-  }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xdolan/PunyGuard.git"
+  },
+  "homepage": "https://0xdolan.github.io/PunyGuard/",
+  "bugs": "https://github.com/0xdolan/PunyGuard/issues"
 }

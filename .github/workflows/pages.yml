@@ -6,7 +6,10 @@ on:
     paths:
       - 'apps/site/**'
       - 'packages/core/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/pages.yml'
+      - '.github/actions/setup/**'
   workflow_dispatch:
 
 permissions:
@@ -19,25 +22,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm docs:build
+      - run: pnpm site:build
 
       - uses: actions/configure-pages@v5
 
@@ -45,5 +36,12 @@ jobs:
         with:
           path: apps/site/dist
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4

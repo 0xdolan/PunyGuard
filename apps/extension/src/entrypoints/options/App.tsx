@@ -5,6 +5,7 @@ import { applyTheme } from '@/lib/theme';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { openAnalyzer, SITE_URL, REPO_URL } from '@/lib/utils';
+import { APP_VERSION } from '@/lib/version';
 
 export default function App() {
   const [settings, setSettings] = useState<PunyGuardSettings>(DEFAULT_SETTINGS);
@@ -125,7 +126,7 @@ export default function App() {
         </div>
 
         <p className="mt-6 text-sm text-muted-foreground">
-          {saved ? 'Saved.' : 'Changes sync via browser storage.'} · v0.0.2 · GPL-3.0
+          {saved ? 'Saved.' : 'Changes sync via browser storage.'} · v{APP_VERSION} · GPL-3.0
         </p>
       </div>
     </div>

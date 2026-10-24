@@ -19,7 +19,6 @@ xcrun safari-web-extension-converter .output/safari-mv3 \
   --project-location safari \
   --app-name PunyGuard \
   --bundle-identifier io.github.0xdolan.PunyGuard \
-  --swift \
   --copy-resources \
   --no-open \
   --no-prompt \

@@ -7,6 +7,7 @@ import { Switch } from '@/components/ui/switch';
 import { getSettings, saveSettings, type PunyGuardSettings } from '@/lib/storage';
 import { applyTheme } from '@/lib/theme';
 import { openAnalyzer, REPO_URL, SITE_URL } from '@/lib/utils';
+import { APP_VERSION } from '@/lib/version';
 
 const CharInspector = lazy(() =>
   import('@/components/CharInspector').then((m) => ({ default: m.CharInspector })),
@@ -142,7 +143,7 @@ export default function App() {
           Site <ExternalLink className="size-3" />
         </a>
         <span aria-hidden>·</span>
-        <span className="font-mono">v0.0.2</span>
+        <span className="font-mono">v{APP_VERSION}</span>
       </footer>
     </div>
   );
