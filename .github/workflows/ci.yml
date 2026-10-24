@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # commit-message checks need history
       - uses: ./.github/actions/setup
 
       - name: Format check
@@ -28,8 +30,17 @@ jobs:
       - name: Version consistency
         run: pnpm version:check
 
-      - name: No en/em dashes
-        run: pnpm lint:dashes
+      - name: No en/em dashes (files and new commit messages)
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          if [ -n "$PR_BASE" ]; then range="$PR_BASE..$PR_HEAD"
+          elif [ -n "$PUSH_BEFORE" ] && git cat-file -e "$PUSH_BEFORE^{commit}" 2>/dev/null; then range="$PUSH_BEFORE..$GITHUB_SHA"
+          else range="-1"; fi
+          echo "checking commits: $range"
+          pnpm lint:dashes --commits "$range"
 
       - name: Lint
         run: pnpm lint
