@@ -124,3 +124,13 @@ html.popup-page #root {
   font-family:
     'JetBrains Mono', 'Noto Sans Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
+
+/* Analyzer page: wide screens make room for the character drawer instead of hiding columns. */
+.drawer-shift {
+  transition: padding-right 0.2s ease-out;
+}
+@media (min-width: 1024px) {
+  html.drawer-open .drawer-shift {
+    padding-right: 420px;
+  }
+}

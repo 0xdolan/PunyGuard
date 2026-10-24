@@ -7,6 +7,7 @@
   "author": "0xdolan",
   "packageManager": "pnpm@10.12.1",
   "scripts": {
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true",
     "dev": "pnpm --filter @punyguard/extension dev",
     "build": "pnpm --filter @punyguard/extension build",
     "build:edge": "pnpm --filter @punyguard/extension build:edge",
@@ -28,10 +29,11 @@
     "zip:firefox": "pnpm --filter @punyguard/extension zip:firefox",
     "zip:safari": "pnpm --filter @punyguard/extension zip:safari",
     "zip:all": "pnpm --filter @punyguard/extension zip:all",
+    "release:stage": "pnpm zip:all && node scripts/stage-release.mjs",
     "safari:xcode": "pnpm --filter @punyguard/extension safari:xcode",
     "version:check": "node scripts/version-check.mjs",
     "version:bump": "node scripts/version-bump.mjs",
-    "verify": "pnpm install --frozen-lockfile && pnpm format:check && pnpm version:check && pnpm lint:dashes && pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e && pnpm zip:all && pnpm lint:amo && pnpm site:build",
+    "verify": "pnpm install --frozen-lockfile && pnpm format:check && pnpm version:check && pnpm lint:dashes && pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e && pnpm zip:all && pnpm lint:amo && node scripts/stage-release.mjs && pnpm site:build",
     "lint:amo": "npx --yes web-ext@8 lint --source-dir apps/extension/.output/firefox-mv3"
   },
   "devDependencies": {

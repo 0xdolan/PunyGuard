@@ -39,10 +39,20 @@ Attackers register domains that look identical to brands you trust by swapping L
 
 ## Install
 
-PunyGuard is not in the browser stores yet. Until it is, install a release build:
+PunyGuard is not in the browser stores yet. Until it is, install a release build. You can also start from the [project site](https://0xdolan.github.io/PunyGuard/#get), which has a button per browser.
 
-1. Download the zip for your browser from [Releases](https://github.com/0xdolan/PunyGuard/releases) once one is published, or build it yourself (see [Develop](#develop)).
-2. Unzip it, then load the folder as an unpacked extension using the steps in [Browser support](#browser-support).
+1. Open the [latest release](https://github.com/0xdolan/PunyGuard/releases/latest) and download the file for your browser:
+
+   | Browser                       | File                               |
+   | ----------------------------- | ---------------------------------- |
+   | Chrome, Brave, Opera, Vivaldi | `punyguard-x.y.z-chrome.zip`       |
+   | Microsoft Edge                | `punyguard-x.y.z-edge.zip`         |
+   | Firefox 140+                  | `punyguard-x.y.z-firefox.xpi`      |
+   | Safari 15.4+ (macOS)          | `punyguard-x.y.z-safari-xcode.zip` |
+
+2. Chromium browsers: unzip it and load the folder as an unpacked extension. Firefox: open the `.xpi`. Safari: open the Xcode project and run it. Step-by-step details are in [Browser support](#browser-support) and in each release's notes.
+
+Prefer to build it yourself? See [Develop](#develop).
 
 ## Privacy & permissions
 
@@ -83,7 +93,8 @@ pnpm dev            # Chrome with live reload
 pnpm dev:firefox    # Firefox with live reload
 pnpm build:all      # Chrome, Edge, Firefox, Safari builds
 pnpm zip:all        # Store-ready zips (+ Firefox sources zip for AMO)
-pnpm verify         # Everything CI checks, locally
+pnpm verify         # Everything CI checks, locally (also runs before every git push)
+pnpm release:stage  # Build every release package into release/ with checksums and notes
 pnpm test:e2e       # Playwright smoke tests
 pnpm site:dev       # Site with live reload → http://localhost:5173/PunyGuard/
 pnpm site:preview   # Production Pages build → http://localhost:4173/PunyGuard/
