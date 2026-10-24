@@ -8,7 +8,7 @@ updates:
       dev-dependencies:
         dependency-type: development
     # Major versions need a deliberate migration (e.g. Tailwind 4), so they are
-    # upgraded by hand. Security updates are still raised for every version.
+    # upgraded by hand. This filters routine version updates only.
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-major']
