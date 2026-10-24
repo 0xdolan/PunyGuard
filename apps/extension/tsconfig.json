@@ -5,7 +5,14 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": false,
     "jsx": "react-jsx",
-    "types": ["chrome", "vite/client"]
+    "types": ["vite/client"]
   },
-  "include": ["src/**/*", "tests/**/*", "wxt.config.ts", "vitest.config.ts"]
+  "include": [
+    ".wxt/wxt.d.ts",
+    "src/**/*",
+    "tests/**/*",
+    "../../packages/core/src/**/*.d.ts",
+    "wxt.config.ts",
+    "vitest.config.ts"
+  ]
 }

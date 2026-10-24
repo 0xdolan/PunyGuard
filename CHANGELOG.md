@@ -2,6 +2,25 @@
 
 All notable changes to PunyGuard are documented here.
 
+## [Unreleased]
+
+### Added
+
+- Edge, Safari, and Brave build targets alongside Chrome and Firefox, all on MV3
+- `pnpm safari:xcode` to wrap the Safari build in an Xcode project
+- `typecheck` scripts and a per-browser CI build matrix with AMO lint
+
+### Changed
+
+- Workspace reorganized into `apps/extension`, `apps/site`, and `packages/core`
+- Firefox and Safari now build as MV3 (WXT previously defaulted them to MV2)
+- Firefox minimum version raised to 140 to declare `data_collection_permissions`
+
+### Fixed
+
+- Options page now opens in a tab as configured
+- Firefox-only manifest keys no longer leak into Chromium builds
+
 ## [0.0.2] — 2026-10-22
 
 ### Added

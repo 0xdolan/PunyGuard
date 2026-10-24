@@ -27,8 +27,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
-      - run: pnpm build && pnpm build:firefox
-      - run: pnpm --filter @punyguard/extension zip && pnpm --filter @punyguard/extension zip:firefox
+      - run: pnpm typecheck
+      # Chrome (also Brave/Opera), Edge, Firefox (+ AMO sources zip), Safari
+      - run: pnpm zip:all
 
       - name: Draft GitHub Release
         uses: softprops/action-gh-release@v2
