@@ -83,7 +83,8 @@ pnpm dev            # Chrome with live reload
 pnpm dev:firefox    # Firefox with live reload
 pnpm build:all      # Chrome, Edge, Firefox, Safari builds
 pnpm zip:all        # Store-ready zips (+ Firefox sources zip for AMO)
-pnpm verify         # Everything CI checks, locally
+pnpm verify         # Everything CI checks, locally (also runs before every git push)
+pnpm release:stage  # Build every release package into release/ with checksums and notes
 pnpm test:e2e       # Playwright smoke tests
 pnpm site:dev       # Site with live reload → http://localhost:5173/PunyGuard/
 pnpm site:preview   # Production Pages build → http://localhost:4173/PunyGuard/
