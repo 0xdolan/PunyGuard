@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   analyzeDomainCharacters,
@@ -130,6 +132,15 @@ describe('domain utils', () => {
     const hosts = extractHostnamesFromHtml(html);
     expect(hosts).toContain('раypal.com');
     expect(hosts).toContain('xn--pple-43d.com');
+  });
+
+  it('extracts an IDN at the very start of the input', () => {
+    expect(extractHostnamesFromHtml('раypal.com is fake')).toContain('раypal.com');
+  });
+
+  it('avoids regex lookbehind, which Safari 15.4–16.3 cannot parse', () => {
+    const src = readFileSync(resolve(__dirname, '../../../../packages/core/src/domain.ts'), 'utf8');
+    expect(src).not.toMatch(/\(\?<[!=]/);
   });
 
   it('rejects strings that are not hostname-shaped', () => {

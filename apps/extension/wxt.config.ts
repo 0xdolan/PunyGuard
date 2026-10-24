@@ -7,6 +7,27 @@ export default defineConfig({
   // WXT defaults Firefox and Safari to MV2; ship MV3 everywhere.
   manifestVersion: 3,
   targetBrowsers: ['chrome', 'edge', 'firefox', 'safari'],
+  zip: {
+    artifactTemplate: 'punyguard-{{version}}-{{browser}}.zip',
+    sourcesTemplate: 'punyguard-{{version}}-sources.zip',
+    // AMO reviewers rebuild from this zip, so it must hold the whole pnpm workspace
+    // (packages/core, lockfile), not just this app. Build: see README "Develop".
+    sourcesRoot: resolve(__dirname, '../..'),
+    includeSources: ['.nvmrc'],
+    excludeSources: [
+      '.agents/**',
+      '.github/**',
+      'apps/site/**',
+      'apps/extension/safari/**',
+      'assets/**',
+      'docs/**',
+      'skills-lock.json',
+      '**/.output/**',
+      '**/.wxt/**',
+      '**/dist/**',
+      '**/test-results/**',
+    ],
+  },
   manifest: ({ browser }) => ({
     name: 'PunyGuard',
     description:
