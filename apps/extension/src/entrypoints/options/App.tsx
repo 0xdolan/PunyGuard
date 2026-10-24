@@ -33,7 +33,7 @@ export default function App() {
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-xl px-4 py-10 sm:px-6">
         <div className="mb-8 flex items-center gap-3">
-          <img src="/icon-48.png" alt="PunyGuard" width={48} height={48} />
+          <img src="/icons/icon-48.png" alt="PunyGuard" width={48} height={48} />
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight">Settings</h1>
             <p className="text-sm text-muted-foreground">

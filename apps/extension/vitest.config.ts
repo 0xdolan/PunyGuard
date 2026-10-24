@@ -9,7 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
-      '@punyguard/core': resolve(__dirname, '../packages/core/src/index.ts'),
+      '@punyguard/core': resolve(__dirname, '../../packages/core/src/index.ts'),
     },
   },
 });

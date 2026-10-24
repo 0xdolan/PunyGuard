@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: punyguard-extension-zips
-          path: extension/.output/*.zip
+          path: apps/extension/.output/*.zip
 
   docs:
     name: Build docs
@@ -72,4 +72,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: punyguard-docs
-          path: docs/dist
+          path: apps/site/dist

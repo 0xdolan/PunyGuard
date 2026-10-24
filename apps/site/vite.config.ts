@@ -6,16 +6,14 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    chunkSizeWarningLimit: 600,
   },
   resolve: {
     alias: {
-      '@punyguard/core': resolve(__dirname, '../packages/core/src/index.ts'),
+      '@punyguard/core': resolve(__dirname, '../../packages/core/src/index.ts'),
     },
   },
   optimizeDeps: {
     include: ['unicode-properties', 'punycode'],
-  },
-  build: {
-    chunkSizeWarningLimit: 600,
   },
 });

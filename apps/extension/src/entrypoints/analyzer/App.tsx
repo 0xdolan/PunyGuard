@@ -38,7 +38,7 @@ export default function App() {
           >
             <ArrowLeft />
           </Button>
-          <img src="/icon-32.png" alt="" width={28} height={28} />
+          <img src="/icons/icon-32.png" alt="" width={28} height={28} />
           <div className="min-w-0 flex-1">
             <h1 className="text-base font-extrabold tracking-tight">Unicode Analyzer</h1>
             <p className="text-xs text-muted-foreground">

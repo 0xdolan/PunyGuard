@@ -10,6 +10,6 @@ All notable changes to PunyGuard are documented here.
 - Local UTS #39–inspired homoglyph / mixed-script / Punycode detection engine
 - Popup (320×545), options page, toolbar badge states (green / amber / red)
 - Content-script page recon for links, scripts, iframes, and HTML hosts
-- GitHub Pages marketing site (`docs/`)
+- GitHub Pages marketing site (`apps/site/`)
 - CI, release draft, and Pages workflows
 - Infinity brand mark (no shield)
