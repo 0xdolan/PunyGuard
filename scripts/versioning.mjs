@@ -15,6 +15,12 @@ export const PACKAGE_FILES = [
 ];
 
 export const CHANGELOG = 'CHANGELOG.md';
+export const README = 'README.md';
+
+/** Static shields.io version badge (works for private repos); `-` is escaped as `--`. */
+export const badgeUrl = (version) =>
+  `https://img.shields.io/badge/version-${version.replace(/-/g, '--')}-FF1A1A`;
+export const BADGE_RE = /https:\/\/img\.shields\.io\/badge\/version-[^)\s]+-FF1A1A/;
 
 // SemVer 2.0 without build metadata; store manifests cannot carry it.
 export const SEMVER_RE =

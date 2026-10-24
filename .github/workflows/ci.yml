@@ -28,6 +28,9 @@ jobs:
       - name: Version consistency
         run: pnpm version:check
 
+      - name: No en/em dashes
+        run: pnpm lint:dashes
+
       - name: Lint
         run: pnpm lint
 

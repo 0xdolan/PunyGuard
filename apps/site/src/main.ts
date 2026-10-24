@@ -48,7 +48,7 @@ function homePage() {
         <div class="reveal">
           <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">PunyGuard</h1>
           <p class="mt-4 max-w-xl text-lg text-[var(--muted)]">
-            Catch lookalike domains and IDN phishing before you click — then inspect every character with formal U+ identity, offline-first.
+            Catch lookalike domains and IDN phishing before you click, then inspect every character with formal U+ identity, offline-first.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="#/inspect" class="rounded-full bg-[var(--ember)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_28px_rgba(255,26,26,0.35)] hover:brightness-110 transition">Open Unicode inspector</a>
@@ -61,14 +61,14 @@ function homePage() {
       </section>
 
       <section class="mt-24 grid gap-4 md:grid-cols-3">
-        ${card('Homograph radar', 'Confusable glyphs mapped to ASCII skeletons — Cyrillic, Greek, fullwidth, and more.')}
+        ${card('Homograph radar', 'Confusable glyphs mapped to ASCII skeletons: Cyrillic, Greek, fullwidth, and more.')}
         ${card('Character forensics', 'U+, formal name, block, script, category, hex/dec, HTML/JS/URL escapes, invisible flags.')}
-        ${card('Search everything', 'Filter by glyph, name, U+XXXX, hex, decimal, block, or script — then copy the list.')}
+        ${card('Search everything', 'Filter by glyph, name, U+XXXX, hex, decimal, block, or script, then copy the list.')}
       </section>
     </main>
 
     <footer class="border-t border-white/10 py-8 text-center text-sm text-[var(--muted)]">
-      Made ♥ by <a class="text-white hover:underline" href="https://github.com/0xdolan">0xdolan</a>
+      Made with <svg class="inline h-3.5 w-3.5 align-[-0.125em] text-[#FF1A1A]" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="love"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> by <a class="text-white hover:underline" href="https://github.com/0xdolan">0xdolan</a>
       · <a class="text-white hover:underline" href="https://github.com/0xdolan/PunyGuard">Source</a>
       · v${__APP_VERSION__}
     </footer>
@@ -227,7 +227,7 @@ function detailHtml(c: CharDetail) {
     ['Decimal', String(c.decimal)],
     ['Unicode block', c.block],
     ['Script group', c.script],
-    ['General category', `${c.category} — ${c.categoryLabel}`],
+    ['General category', `${c.category}: ${c.categoryLabel}`],
     ['Combining class', String(c.combiningClass)],
     ['Bidi', c.bidiClass],
     ['HTML escape', c.htmlEscape],

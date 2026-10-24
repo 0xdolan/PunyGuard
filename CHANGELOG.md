@@ -6,14 +6,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
-## [0.0.2] — 2026-10-23
+## [0.0.2] - 2026-10-23
 
 First public release.
 
 ### Added
 
 - MV3 extension for Chrome, Edge, Brave, Firefox (140+), and Safari (15.4+) from one WXT + React 19 codebase
-- Local UTS #39–inspired homoglyph, mixed-script, invisible-character, and Punycode detection engine
+- Local UTS #39-inspired homoglyph, mixed-script, invisible-character, and Punycode detection engine
 - Popup (31rem × max 34rem), options page, analyzer tab, and toolbar badge (green / amber / red)
 - Content-script page recon for links, scripts, iframes, and IDN mentions in page HTML
 - Unicode inspector with per-character `U+`, name, block, script, and escapes

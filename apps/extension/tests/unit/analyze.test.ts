@@ -138,7 +138,7 @@ describe('domain utils', () => {
     expect(extractHostnamesFromHtml('раypal.com is fake')).toContain('раypal.com');
   });
 
-  it('avoids regex lookbehind, which Safari 15.4–16.3 cannot parse', () => {
+  it('avoids regex lookbehind, which Safari 15.4 to 16.3 cannot parse', () => {
     const src = readFileSync(resolve(__dirname, '../../../../packages/core/src/domain.ts'), 'utf8');
     expect(src).not.toMatch(/\(\?<[!=]/);
   });

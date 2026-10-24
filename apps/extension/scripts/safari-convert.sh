@@ -11,7 +11,7 @@ if ! command -v xcrun >/dev/null 2>&1; then
 fi
 
 if [ ! -f .output/safari-mv3/manifest.json ]; then
-  echo "Missing .output/safari-mv3 — run 'pnpm build:safari' first." >&2
+  echo "Missing .output/safari-mv3; run 'pnpm build:safari' first." >&2
   exit 1
 fi
 

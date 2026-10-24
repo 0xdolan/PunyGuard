@@ -4,7 +4,7 @@ description: Install pnpm (from packageManager), Node (from .nvmrc), and workspa
 runs:
   using: composite
   steps:
-    # No `version:` input — pnpm/action-setup reads package.json#packageManager,
+    # No `version:` input: pnpm/action-setup reads package.json#packageManager,
     # and passing both is an error when they differ.
     - uses: pnpm/action-setup@v4
 

@@ -6,8 +6,11 @@
 //
 // It edits files only; commit and tag as printed at the end.
 import {
+  BADGE_RE,
   CHANGELOG,
   PACKAGE_FILES,
+  README,
+  badgeUrl,
   REPO_URL,
   SEMVER_RE,
   changelogSection,
@@ -45,13 +48,13 @@ if (version === current) fail([`already at ${version}`]);
 const changelog = read(CHANGELOG);
 const unreleased = changelogSection(changelog, 'Unreleased');
 if (unreleased === null) fail([`${CHANGELOG} is missing "## [Unreleased]"`]);
-if (!unreleased) fail([`${CHANGELOG} "Unreleased" is empty — record the changes first`]);
+if (!unreleased) fail([`${CHANGELOG} "Unreleased" is empty; record the changes first`]);
 
 // Local calendar date, YYYY-MM-DD.
 const date = new Date().toLocaleDateString('en-CA');
 let updated = changelog.replace(
   /^## \[Unreleased\].*$/m,
-  `## [Unreleased]\n\n## [${version}] — ${date}`,
+  `## [Unreleased]\n\n## [${version}] - ${date}`,
 );
 
 // Link references: Unreleased compares from the new tag; the new version compares from the previous tag.
@@ -66,6 +69,8 @@ updated = updated.replace(
 if (!/^\[Unreleased\]: /m.test(updated))
   updated = `${updated.trimEnd()}\n\n[Unreleased]: ${REPO_URL}/compare/v${version}...HEAD\n[${version}]: ${versionLink}\n`;
 write(CHANGELOG, updated);
+
+write(README, read(README).replace(BADGE_RE, badgeUrl(version)));
 
 for (const file of PACKAGE_FILES) {
   const pkg = readJson(file);
