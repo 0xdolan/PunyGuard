@@ -118,7 +118,7 @@ export function mountInspector(root: HTMLElement, raw: string) {
         <div id="table-wrap" class="max-h-[65vh] overflow-auto rounded-xl border border-[var(--border)]">
           <table class="w-full min-w-[860px] border-collapse text-left text-xs" id="char-table">
             <thead class="sticky top-0 z-[1] bg-[var(--card)]">
-              <tr>${CHAR_COLUMNS.map((col) => `<th scope="col" data-key="${col.key}" class="border-b border-[var(--border)] px-2 py-1.5 align-middle font-semibold"></th>`).join('')}</tr>
+              <tr>${CHAR_COLUMNS.map((col) => `<th scope="col" data-key="${col.key}" class="border-b border-[var(--border)] px-1 py-1.5 align-middle font-semibold"></th>`).join('')}</tr>
             </thead>
             <tbody id="char-tbody"></tbody>
           </table>
@@ -158,10 +158,10 @@ export function mountInspector(root: HTMLElement, raw: string) {
         dir === 'asc' ? 'ascending' : dir === 'desc' ? 'descending' : 'none',
       );
       th.innerHTML = `<div class="flex items-center gap-0.5 whitespace-nowrap">
-        <button type="button" data-sort="${key}" class="inline-flex cursor-pointer items-center gap-1 rounded-md px-1.5 py-1 text-[11px] uppercase tracking-wide ${dir ? 'text-white' : 'text-[var(--muted)]'} hover:bg-white/5 hover:text-white" aria-label="Sort by ${esc(col.label)}${dir ? `, currently ${dir === 'asc' ? 'ascending' : 'descending'}` : ''}">
+        <button type="button" data-sort="${key}" class="inline-flex cursor-pointer items-center gap-1 rounded-md px-1 py-1 text-[11px] uppercase tracking-wide ${dir ? 'text-white' : 'text-[var(--muted)]'} hover:bg-white/5 hover:text-white" aria-label="Sort by ${esc(col.label)}${dir ? `, currently ${dir === 'asc' ? 'ascending' : 'descending'}` : ''}">
           ${esc(col.label)}${icon(dir === 'asc' ? 'asc' : dir === 'desc' ? 'desc' : 'sort', `size-3 ${dir ? 'text-[var(--ember)]' : 'opacity-50'}`)}
         </button>
-        <button type="button" data-filter="${key}" aria-haspopup="dialog" aria-expanded="${openFilter === key}" class="relative inline-flex size-6 cursor-pointer items-center justify-center rounded-md hover:bg-white/5 ${selectedCount ? 'text-[var(--ember)]' : 'text-[var(--muted)] hover:text-white'}" aria-label="Filter ${esc(col.label)}${selectedCount ? ` (${selectedCount} selected)` : ''}">
+        <button type="button" data-filter="${key}" aria-haspopup="dialog" aria-expanded="${openFilter === key}" class="relative inline-flex size-5 cursor-pointer items-center justify-center rounded-md hover:bg-white/5 ${selectedCount ? 'text-[var(--ember)]' : 'text-[var(--muted)] hover:text-white'}" aria-label="Filter ${esc(col.label)}${selectedCount ? ` (${selectedCount} selected)` : ''}">
           ${icon('funnel', 'size-3')}
           ${selectedCount ? `<span class="absolute -right-1 -top-1 min-w-[15px] rounded-full bg-[var(--ember)] px-1 text-center text-[9px] font-bold leading-[15px] text-white">${selectedCount}</span>` : ''}
         </button>
@@ -190,15 +190,15 @@ export function mountInspector(root: HTMLElement, raw: string) {
   function rowHtml(c: CharDetail) {
     const sel = c.index === selected;
     return `<tr data-idx="${c.index}" aria-selected="${sel}" tabindex="0" class="cursor-pointer border-t border-[var(--border)] outline-none hover:bg-white/5 focus-visible:bg-white/10 ${sel ? 'bg-[var(--ember)]/10 shadow-[inset_3px_0_0_var(--ember)]' : ''}">
-      <td class="font-mono px-3 py-2 text-[var(--muted)]">${c.index}</td>
-      <td class="font-glyph px-3 py-2 text-base">${esc(c.display)}</td>
-      <td class="font-mono px-3 py-2">${c.uPlus}</td>
-      <td class="font-mono whitespace-nowrap px-3 py-2">${esc(c.name)}</td>
-      <td class="px-3 py-2 text-[var(--muted)]">${esc(c.block)}</td>
-      <td class="px-3 py-2 text-[var(--muted)]">${esc(c.script)}</td>
-      <td class="font-mono px-3 py-2" title="${esc(c.categoryLabel)}">${c.category}</td>
-      <td class="font-mono px-3 py-2 tabular-nums">${c.decimal}</td>
-      <td class="px-3 py-2"><div class="flex gap-1">${charFlags(c).map(flagPill).join('')}</div></td>
+      <td class="font-mono px-2.5 py-2 text-[var(--muted)]">${c.index}</td>
+      <td class="font-glyph px-2.5 py-2 text-base">${esc(c.display)}</td>
+      <td class="font-mono px-2.5 py-2">${c.uPlus}</td>
+      <td class="font-mono whitespace-nowrap px-2.5 py-2">${esc(c.name)}</td>
+      <td class="px-2.5 py-2 text-[var(--muted)]">${esc(c.block)}</td>
+      <td class="px-2.5 py-2 text-[var(--muted)]">${esc(c.script)}</td>
+      <td class="font-mono px-2.5 py-2" title="${esc(c.categoryLabel)}">${c.category}</td>
+      <td class="font-mono px-2.5 py-2 tabular-nums">${c.decimal}</td>
+      <td class="px-2.5 py-2"><div class="flex gap-1">${charFlags(c).map(flagPill).join('')}</div></td>
     </tr>`;
   }
 
