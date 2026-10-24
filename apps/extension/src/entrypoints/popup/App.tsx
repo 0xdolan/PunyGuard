@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { ExternalLink, Settings2 } from 'lucide-react';
+import { ExternalLink, Heart, Settings2 } from 'lucide-react';
 import type { ScanResult } from '@punyguard/core';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -119,7 +119,12 @@ export default function App() {
 
       <footer className="flex shrink-0 flex-wrap items-center justify-center gap-x-1.5 gap-y-1 border-t border-border px-4 py-2.5 text-center text-[11px] text-muted-foreground">
         <span>
-          Made <span className="text-primary">♥</span> by{' '}
+          Made with{' '}
+          <Heart
+            className="inline size-3 fill-primary text-primary align-[-0.125em]"
+            aria-label="love"
+          />{' '}
+          by{' '}
           <a
             className="font-medium text-foreground hover:underline"
             href="https://github.com/0xdolan"

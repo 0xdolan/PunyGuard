@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "type": "module",
-  "description": "PunyGuard browser extension — local IDN homograph & phishing lookalike detection",
+  "description": "PunyGuard browser extension: local IDN homograph & phishing lookalike detection",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "wxt",

@@ -8,15 +8,15 @@ This guide covers how versions, the changelog, tags, and releases fit together, 
 
 The root `package.json` `version` is the single source of truth. Everything else derives from it:
 
-| Where                                            | How it gets the version                                                |
-| ------------------------------------------------ | ---------------------------------------------------------------------- |
-| `apps/*/package.json`, `packages/*/package.json` | Written by `pnpm version:bump`; enforced by `pnpm version:check`       |
-| Extension manifest                               | WXT reads `apps/extension/package.json` at build time                  |
-| Popup and options footers                        | `browser.runtime.getManifest()` at runtime (`APP_VERSION`)             |
-| GitHub Pages site footer                         | `__APP_VERSION__`, injected by Vite from `apps/site/package.json`      |
-| README                                           | Version badge reads `package.json` on `main`                           |
-| `CHANGELOG.md`                                   | `## [x.y.z] — YYYY-MM-DD` section plus a `[x.y.z]:` link               |
-| Git tag / GitHub Release                         | `vx.y.z`; the release workflow fails if it differs from `package.json` |
+| Where                                            | How it gets the version                                                         |
+| ------------------------------------------------ | ------------------------------------------------------------------------------- |
+| `apps/*/package.json`, `packages/*/package.json` | Written by `pnpm version:bump`; enforced by `pnpm version:check`                |
+| Extension manifest                               | WXT reads `apps/extension/package.json` at build time                           |
+| Popup and options footers                        | `browser.runtime.getManifest()` at runtime (`APP_VERSION`)                      |
+| GitHub Pages site footer                         | `__APP_VERSION__`, injected by Vite from `apps/site/package.json`               |
+| README version badge                             | Static badge rewritten by `pnpm version:bump`; enforced by `pnpm version:check` |
+| `CHANGELOG.md`                                   | `## [x.y.z] - YYYY-MM-DD` section plus a `[x.y.z]:` link                        |
+| Git tag / GitHub Release                         | `vx.y.z`; the release workflow fails if it differs from `package.json`          |
 
 Never type a version number into source code. `pnpm version:check` (run in CI) fails if `vX.Y.Z` appears under `apps/*/src` or `packages/*/src`.
 

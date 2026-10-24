@@ -3,8 +3,7 @@
 **Local-first protection against IDN homograph attacks, lookalike domains, and phishing script spoofing.**
 
 [![CI](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml/badge.svg)](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/github/package-json/v/0xdolan/PunyGuard?label=version)](CHANGELOG.md)
-[![Release](https://img.shields.io/github/v/release/0xdolan/PunyGuard?include_prereleases)](https://github.com/0xdolan/PunyGuard/releases)
+[![Version](https://img.shields.io/badge/version-0.0.2-FF1A1A)](CHANGELOG.md)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Site](https://img.shields.io/badge/site-GitHub%20Pages-111111)](https://0xdolan.github.io/PunyGuard/)
 
@@ -12,7 +11,7 @@
   <img src="assets/brand/logo.svg" alt="PunyGuard" width="160" />
 </p>
 
-PunyGuard is an open-source cross-browser extension (Chrome, Edge, Brave, Firefox, Safari) that inspects hostnames on every page — including embedded links, scripts, and iframes — for Unicode lookalikes and mixed-script phishing tells. Analysis runs **entirely on-device** so your browsing data never leaves your machine during live checks.
+PunyGuard is an open-source cross-browser extension (Chrome, Edge, Brave, Firefox, Safari) that inspects hostnames on every page, including embedded links, scripts, and iframes, for Unicode lookalikes and mixed-script phishing tells. Analysis runs **entirely on-device** so your browsing data never leaves your machine during live checks.
 
 > Project site: [https://0xdolan.github.io/PunyGuard/](https://0xdolan.github.io/PunyGuard/)
 
@@ -28,9 +27,9 @@ Attackers register domains that look identical to brands you trust by swapping L
 
 ## Features
 
-- UTS #39–inspired confusable / homoglyph detection (local matrix)
+- UTS #39-inspired confusable / homoglyph detection (local matrix)
 - Mixed-script and invisible-character detection
-- **Unicode inspector** — paste any domain; see each character’s `U+`, formal name, block, script, category, hex/dec, escapes
+- **Unicode inspector**: paste any domain; see each character’s `U+`, formal name, block, script, category, hex/dec, escapes
 - Search characters by name, `U+`, hex, decimal, block, or script; copy list to clipboard
 - Extension **analyzer** tab + GitHub Pages inspector (`#/inspect`)
 - Live page recon + toolbar threat badge (green / amber / red)
@@ -92,4 +91,4 @@ scripts/          Version bump & consistency checks
 
 ## License
 
-[GNU GPL v3](./LICENSE) — Made ❤️ by [0xdolan](https://github.com/0xdolan)
+[GNU GPL v3](./LICENSE) · Made with ❤️ by [0xdolan](https://github.com/0xdolan)

@@ -6,8 +6,11 @@
 //   node scripts/version-check.mjs --notes out.md  # also write release notes for this version
 import { execFileSync } from 'node:child_process';
 import {
+  BADGE_RE,
   CHANGELOG,
   PACKAGE_FILES,
+  README,
+  badgeUrl,
   REPO_URL,
   SEMVER_RE,
   changelogSection,
@@ -42,6 +45,12 @@ if (notes === null) errors.push(`${CHANGELOG} has no "## [${version}]" section`)
 else if (!notes) errors.push(`${CHANGELOG} section for ${version} is empty`);
 if (!changelog.includes(`[${version}]: ${REPO_URL}/`))
   errors.push(`${CHANGELOG} is missing the [${version}] link reference`);
+
+const readme = read(README);
+const badge = readme.match(BADGE_RE)?.[0];
+if (!badge) errors.push(`${README} is missing the version badge`);
+else if (badge !== badgeUrl(version))
+  errors.push(`${README} version badge is ${badge}, expected ${badgeUrl(version)}`);
 
 // UI must read the version at runtime/build time, never hard-code it.
 try {

@@ -98,11 +98,11 @@ export function CharInspector({ initialDomain = '', compact = false, onOpenFull 
               <dl className="flex flex-col gap-1.5 font-mono text-xs">
                 <div className="grid grid-cols-[72px_1fr] gap-2">
                   <dt className="text-muted-foreground">Unicode</dt>
-                  <dd className="break-all">{idn.unicode || '—'}</dd>
+                  <dd className="break-all">{idn.unicode || '-'}</dd>
                 </div>
                 <div className="grid grid-cols-[72px_1fr] gap-2">
                   <dt className="text-muted-foreground">ACE</dt>
-                  <dd className="break-all">{idn.ascii || '—'}</dd>
+                  <dd className="break-all">{idn.ascii || '-'}</dd>
                 </div>
               </dl>
               {idn.labels.some((l) => l.changed) && (
@@ -302,7 +302,7 @@ function CharDetailPanel({ char }: { char: CharDetail }) {
     ['Decimal', String(char.decimal)],
     ['Unicode block', char.block],
     ['Script group', char.script],
-    ['General category', `${char.category} — ${char.categoryLabel}`],
+    ['General category', `${char.category}: ${char.categoryLabel}`],
     ['Combining class', String(char.combiningClass)],
     ['Bidi', char.bidiClass],
     ['As text', char.isInvisible ? '(invisible)' : char.char],
