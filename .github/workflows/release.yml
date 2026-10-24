@@ -17,38 +17,79 @@ jobs:
     name: CI
     uses: ./.github/workflows/ci.yml
 
+  safari-xcode:
+    name: Safari Xcode project
+    needs: ci
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - name: Build and zip the Xcode project
+        run: |
+          pnpm safari:xcode
+          cd apps/extension
+          zip -qr "$RUNNER_TEMP/punyguard-${GITHUB_REF_NAME#v}-safari-xcode.zip" safari
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: safari-xcode
+          path: ${{ runner.temp }}/*-safari-xcode.zip
+          if-no-files-found: error
+
   release:
     name: GitHub Release
-    needs: ci
+    needs: [ci, safari-xcode]
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      # Optional: add these repository secrets to sign the Firefox .xpi with Mozilla.
+      AMO_JWT_ISSUER: ${{ secrets.AMO_JWT_ISSUER }}
+      AMO_JWT_SECRET: ${{ secrets.AMO_JWT_SECRET }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
 
       - name: Tag matches version and changelog
-        run: pnpm version:check --tag "${GITHUB_REF_NAME}" --notes "${RUNNER_TEMP}/notes.md"
+        run: pnpm version:check --tag "${GITHUB_REF_NAME}"
 
       # Chrome (also Brave/Opera/Vivaldi), Edge, Firefox (+ AMO sources zip), Safari
       - name: Build store packages
         run: pnpm zip:all
 
-      # Stage outside WXT's dot-directory, which upload tools may skip.
-      - name: Stage files and checksums
+      - uses: actions/download-artifact@v4
+        with:
+          name: safari-xcode
+          path: ${{ runner.temp }}/xcode
+
+      - name: Sign Firefox package (unlisted, optional)
+        if: env.AMO_JWT_ISSUER != '' && env.AMO_JWT_SECRET != ''
         run: |
-          mkdir -p release
-          cp apps/extension/.output/*.zip release/
-          cd release && sha256sum *.zip > SHA256SUMS.txt && ls -l
+          V="${GITHUB_REF_NAME#v}"
+          npx --yes web-ext@8 sign --channel unlisted \
+            --source-dir apps/extension/.output/firefox-mv3 \
+            --upload-source-code "apps/extension/.output/punyguard-$V-sources.zip" \
+            --api-key "$AMO_JWT_ISSUER" --api-secret "$AMO_JWT_SECRET" \
+            --artifacts-dir "$RUNNER_TEMP/signed"
+          echo "SIGNED_XPI=$(ls "$RUNNER_TEMP"/signed/*.xpi | head -1)" >> "$GITHUB_ENV"
+
+      - name: Stage packages, checksums, and notes
+        run: |
+          node scripts/stage-release.mjs \
+            --safari-xcode "$(ls "$RUNNER_TEMP"/xcode/*-safari-xcode.zip)" \
+            ${SIGNED_XPI:+--signed-xpi "$SIGNED_XPI"}
+          ls -l release
 
       - name: Draft GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           name: PunyGuard ${{ github.ref_name }}
-          body_path: ${{ runner.temp }}/notes.md
+          body_path: release/notes.md
           draft: true
           prerelease: ${{ contains(github.ref_name, '-') }}
           files: |
             release/*.zip
+            release/*.xpi
             release/SHA256SUMS.txt
           fail_on_unmatched_files: true
