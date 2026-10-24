@@ -19,7 +19,7 @@ jobs:
     name: Lint · Typecheck · Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # commit-message checks need history
       - uses: ./.github/actions/setup
@@ -64,7 +64,7 @@ jobs:
         # Brave, Opera, and Vivaldi install the chrome build.
         browser: [chrome, edge, firefox, safari]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
 
       - name: Zip extension
@@ -87,7 +87,7 @@ jobs:
     # Informational until the converter step has a green run on GitHub's macOS image.
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - run: pnpm safari:xcode
 
@@ -95,6 +95,6 @@ jobs:
     name: Build site
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - run: pnpm site:build
