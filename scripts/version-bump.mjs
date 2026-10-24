@@ -47,7 +47,8 @@ const unreleased = changelogSection(changelog, 'Unreleased');
 if (unreleased === null) fail([`${CHANGELOG} is missing "## [Unreleased]"`]);
 if (!unreleased) fail([`${CHANGELOG} "Unreleased" is empty — record the changes first`]);
 
-const date = new Date().toISOString().slice(0, 10);
+// Local calendar date, YYYY-MM-DD.
+const date = new Date().toLocaleDateString('en-CA');
 let updated = changelog.replace(/^## \[Unreleased\].*$/m, `## [Unreleased]\n\n## [${version}] — ${date}`);
 
 // Link references: Unreleased compares from the new tag; the new version compares from the previous tag.
@@ -68,8 +69,10 @@ for (const file of PACKAGE_FILES) {
 
 console.log(`✔ ${current} → ${version}
 
-Next:
-  pnpm format && pnpm version:check
+Next (see docs/RELEASING.md):
+  pnpm format && pnpm verify
   git commit -am "chore(release): v${version}"
+  # open a PR into main; after it merges:
+  git switch main && git pull
   git tag -a v${version} -m "v${version}"
-  git push origin HEAD --follow-tags`);
+  git push origin v${version}`);
