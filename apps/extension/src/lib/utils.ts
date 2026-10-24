@@ -11,7 +11,7 @@ export const REPO_URL = 'https://github.com/0xdolan/PunyGuard';
 
 export function openAnalyzer(domain?: string) {
   const q = domain ? `?domain=${encodeURIComponent(domain)}` : '';
-  void browser.tabs.create({ url: browser.runtime.getURL(`analyzer.html${q}`) });
+  void browser.tabs.create({ url: browser.runtime.getURL(`/analyzer.html${q}`) });
 }
 
 export function openSiteInspector(domain?: string) {

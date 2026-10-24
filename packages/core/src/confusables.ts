@@ -110,7 +110,7 @@ export const enum ScriptBit {
   Other = 1 << 12,
 }
 
-export function scriptBitForCodePoint(cp: number): ScriptBit {
+export function scriptBitForCodePoint(cp: number): ScriptBit | 0 {
   if ((cp >= 0x0041 && cp <= 0x005a) || (cp >= 0x0061 && cp <= 0x007a)) return ScriptBit.Latin;
   if (cp >= 0x00c0 && cp <= 0x024f) return ScriptBit.Latin;
   if (cp >= 0x0400 && cp <= 0x04ff) return ScriptBit.Cyrillic;

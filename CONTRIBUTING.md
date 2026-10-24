@@ -14,7 +14,7 @@ Thank you for helping people stay safer online.
 
 1. Branch from `develop` (or `main` for hotfixes).
 2. Keep PRs focused; include tests for engine changes.
-3. CI must pass (lint, unit tests, builds).
+3. CI must pass (format, lint, typecheck, unit tests, per-browser builds).
 4. Tag releases as `vX.Y.Z` to draft GitHub Releases with zipped artifacts.
 
 ## Local setup

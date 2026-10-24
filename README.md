@@ -10,7 +10,7 @@
   <img src="assets/brand/logo.svg" alt="PunyGuard" width="160" />
 </p>
 
-PunyGuard is an open-source cross-browser extension (Chrome, Edge, Firefox, Safari) that inspects hostnames on every page — including embedded links, scripts, and iframes — for Unicode lookalikes and mixed-script phishing tells. Analysis runs **entirely on-device** so your browsing data never leaves your machine during live checks.
+PunyGuard is an open-source cross-browser extension (Chrome, Edge, Brave, Firefox, Safari) that inspects hostnames on every page — including embedded links, scripts, and iframes — for Unicode lookalikes and mixed-script phishing tells. Analysis runs **entirely on-device** so your browsing data never leaves your machine during live checks.
 
 > Project site: [https://0xdolan.github.io/PunyGuard/](https://0xdolan.github.io/PunyGuard/)
 
@@ -39,18 +39,32 @@ Attackers register domains that look identical to brands you trust by swapping L
 
 TypeScript (strict) · React 19 · WebExtensions MV3 · **WXT** (Vite) · Tailwind · DaisyUI · Vitest · Playwright · pnpm
 
+## Browser support
+
+All targets ship Manifest V3 from one codebase.
+
+| Browser | Minimum      | Build                       | Output                                 | Load unpacked                                                          |
+| ------- | ------------ | --------------------------- | -------------------------------------- | ---------------------------------------------------------------------- |
+| Chrome  | 88+          | `pnpm build`                | `apps/extension/.output/chrome-mv3`    | `chrome://extensions` → Developer mode → Load unpacked                 |
+| Brave   | Chromium 88+ | `pnpm build`                | `apps/extension/.output/chrome-mv3`    | `brave://extensions` → Developer mode → Load unpacked                  |
+| Edge    | 88+          | `pnpm build:edge`           | `apps/extension/.output/edge-mv3`      | `edge://extensions` → Developer mode → Load unpacked                   |
+| Firefox | 140+         | `pnpm build:firefox`        | `apps/extension/.output/firefox-mv3`   | `about:debugging` → This Firefox → Load Temporary Add-on               |
+| Safari  | 15.4+        | `pnpm safari:xcode` (macOS) | `apps/extension/safari/` Xcode project | Run the app in Xcode, then enable it in Safari → Settings → Extensions |
+
+Brave and other Chromium browsers (Opera, Vivaldi) use the Chrome build and install from the Chrome Web Store. Safari requires macOS with Xcode; `pnpm safari:xcode` builds `safari-mv3` and wraps it with `safari-web-extension-converter`.
+
 ## Develop
 
 ```bash
 pnpm install
-pnpm dev          # Chrome MV3 via WXT
-pnpm build        # Production Chrome/Edge build
-pnpm build:firefox
-pnpm test
-pnpm docs:dev     # Marketing site (GitHub Pages source)
+pnpm dev            # Chrome with live reload
+pnpm dev:firefox    # Firefox with live reload
+pnpm build:all      # Chrome, Edge, Firefox, Safari builds
+pnpm zip:all        # Store-ready zips (+ Firefox sources zip for AMO)
+pnpm lint && pnpm typecheck && pnpm test
+pnpm test:e2e       # Playwright smoke tests
+pnpm docs:dev       # Marketing site (GitHub Pages source)
 ```
-
-Load the unpacked build from `apps/extension/.output/chrome-mv3` (or Firefox output) in your browser’s extension developer mode.
 
 ## Repository layout
 

@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   quality:
-    name: Lint · Test · Build
+    name: Lint · Typecheck · Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,28 +35,75 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Typecheck
+        run: pnpm typecheck
+
       - name: Unit tests
         run: pnpm test
 
-      - name: Build extension (Chrome)
-        run: pnpm build
+  build:
+    name: Build (${{ matrix.browser }})
+    needs: quality
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Brave and other Chromium browsers install the chrome build.
+        browser: [chrome, edge, firefox, safari]
+    steps:
+      - uses: actions/checkout@v4
 
-      - name: Build extension (Firefox)
-        run: pnpm build:firefox
-
-      - name: Zip artifacts
-        run: |
-          pnpm --filter @punyguard/extension zip
-          pnpm --filter @punyguard/extension zip:firefox
-
-      - name: Upload zips
-        uses: actions/upload-artifact@v4
+      - uses: pnpm/action-setup@v4
         with:
-          name: punyguard-extension-zips
-          path: apps/extension/.output/*.zip
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Zip extension
+        run: pnpm --filter @punyguard/extension exec wxt zip -b ${{ matrix.browser }}
+
+      - name: Lint Firefox package (AMO rules)
+        if: matrix.browser == 'firefox'
+        run: npx --yes web-ext@8 lint --source-dir apps/extension/.output/firefox-mv3
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: punyguard-${{ matrix.browser }}
+          path: |
+            apps/extension/.output/*.zip
+            apps/extension/.output/${{ matrix.browser }}-mv3/
+
+  safari-xcode:
+    name: Safari Xcode project
+    needs: quality
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm safari:xcode
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: punyguard-safari-xcode
+          path: apps/extension/safari/
 
   docs:
-    name: Build docs
+    name: Build site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -71,5 +118,5 @@ jobs:
       - run: pnpm docs:build
       - uses: actions/upload-artifact@v4
         with:
-          name: punyguard-docs
+          name: punyguard-site
           path: apps/site/dist

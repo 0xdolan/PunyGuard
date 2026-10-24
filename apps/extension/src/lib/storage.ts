@@ -16,14 +16,17 @@ export const DEFAULT_SETTINGS: PunyGuardSettings = {
 
 const KEY = 'punyguard.settings';
 
+// Safari and some Chromium forks may not expose sync storage; fall back to local.
+const area = () => browser.storage.sync ?? browser.storage.local;
+
 export async function getSettings(): Promise<PunyGuardSettings> {
-  const data = await browser.storage.sync.get(KEY);
+  const data = await area().get(KEY);
   return { ...DEFAULT_SETTINGS, ...(data[KEY] as Partial<PunyGuardSettings> | undefined) };
 }
 
 export async function saveSettings(patch: Partial<PunyGuardSettings>): Promise<PunyGuardSettings> {
   const current = await getSettings();
   const next = { ...current, ...patch };
-  await browser.storage.sync.set({ [KEY]: next });
+  await area().set({ [KEY]: next });
   return next;
 }
