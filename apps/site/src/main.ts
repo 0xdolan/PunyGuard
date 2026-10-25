@@ -66,6 +66,7 @@ function homePage() {
     <footer class="border-t border-white/10 py-8 text-center text-sm text-[var(--muted)]">
       Made with <svg class="inline h-3.5 w-3.5 align-[-0.125em] text-[#FF1A1A]" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="love"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> by <a class="text-white hover:underline" href="https://github.com/0xdolan">0xdolan</a>
       · <a class="text-white hover:underline" href="https://github.com/0xdolan/PunyGuard">Source</a>
+      · <a class="text-white hover:underline" href="${base}privacy.html">Privacy</a>
       · v${__APP_VERSION__}
     </footer>
   </div>`;

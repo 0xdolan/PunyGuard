@@ -1,0 +1,261 @@
+<!doctype html>
+<!-- Web copy of PRIVACY.md for store and OAuth forms that need a link on our own domain. Keep the two in sync. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy · PunyGuard</title>
+    <meta
+      name="description"
+      content="PunyGuard collects no data. All analysis runs on your device."
+    />
+    <link rel="icon" type="image/png" href="/PunyGuard/favicon.png" />
+    <style>
+      :root {
+        --bg: #070a0f;
+        --card: #121821;
+        --border: #1c2530;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --ember: #ff1a1a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          16px/1.65 system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+        font-variant-ligatures: none;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 40px 20px 64px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 18px;
+      }
+      header a {
+        color: inherit;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      h1 {
+        font-size: 34px;
+        line-height: 1.2;
+        margin: 28px 0 4px;
+      }
+      h2 {
+        font-size: 20px;
+        margin: 32px 0 8px;
+      }
+      p,
+      li {
+        color: #d5dbe3;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      a {
+        color: #ff5c5c;
+      }
+      code {
+        font-family: ui-monospace, 'JetBrains Mono', monospace;
+        font-size: 0.9em;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1px 6px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 8px 0;
+        font-size: 15px;
+      }
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .summary {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--ember);
+        border-radius: 10px;
+        padding: 14px 18px;
+      }
+      @media (max-width: 560px) {
+        table,
+        tbody,
+        tr,
+        td,
+        th {
+          display: block;
+        }
+        thead {
+          display: none;
+        }
+        td {
+          border: 0;
+          padding: 4px 0;
+        }
+        tr {
+          border-bottom: 1px solid var(--border);
+          padding: 10px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <a href="/PunyGuard/"
+          ><img src="/PunyGuard/logo-mark.svg" alt="" width="28" height="28" />PunyGuard</a
+        >
+      </header>
+
+      <h1>Privacy Policy</h1>
+      <p class="muted">
+        PunyGuard browser extension and website (https://0xdolan.github.io/PunyGuard/). Effective
+        date: October 24, 2026.
+      </p>
+
+      <h2>Summary</h2>
+      <p class="summary">
+        PunyGuard does not collect, transmit, sell, or share any personal data or browsing data. All
+        analysis happens on your device. The extension makes no network requests.
+      </p>
+
+      <h2>What the extension reads</h2>
+      <p>To warn you about lookalike domains, the extension reads, on the pages you visit:</p>
+      <ul>
+        <li>the page's own hostname,</li>
+        <li>the hostnames in links, scripts, frames, forms, and images on the page, and</li>
+        <li>the first part of the page's HTML, to find domain names mentioned in text.</li>
+      </ul>
+      <p>
+        These hostnames are analyzed in memory by code inside the extension. Page content, URLs, and
+        results are never sent anywhere.
+      </p>
+
+      <h2>What the extension stores</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Where</th>
+            <th>How long</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Your settings (on/off, theme, badge, iframe scanning, show safe domains)</td>
+            <td>
+              The browser's extension storage (<code>storage.sync</code>, or
+              <code>storage.local</code> where sync is unavailable)
+            </td>
+            <td>Until you change them or uninstall</td>
+          </tr>
+          <tr>
+            <td>Scan results for open tabs</td>
+            <td>The browser's session storage (<code>storage.session</code>)</td>
+            <td>Cleared when you navigate, close the tab, or close the browser</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        If you have turned on your browser's own sync feature (for example Chrome Sync or Firefox
+        Sync), your browser may sync the settings above between your devices. That sync is provided
+        and governed by your browser vendor, not by PunyGuard. Scan results are never synced.
+      </p>
+
+      <h2>Permissions and why they are needed</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Permission</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Access to all sites (<code>&lt;all_urls&gt;</code>)</td>
+            <td>Read the hostnames on pages you visit so they can be checked</td>
+          </tr>
+          <tr>
+            <td><code>tabs</code></td>
+            <td>Match scan results to the right tab and read the tab's address</td>
+          </tr>
+          <tr>
+            <td><code>storage</code></td>
+            <td>Save your settings and the current tabs' scan results</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>What PunyGuard does not do</h2>
+      <ul>
+        <li>No analytics, telemetry, tracking, or advertising.</li>
+        <li>No accounts, cookies, or user identifiers.</li>
+        <li>No remote code: all code ships inside the extension package.</li>
+        <li>No sale or transfer of data to anyone, for any purpose.</li>
+      </ul>
+
+      <h2>Links you choose to open</h2>
+      <p>
+        The popup and settings page contain links to the project's documentation, source code, and
+        website on GitHub. Opening them is ordinary web browsing, subject to
+        <a
+          href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+          >GitHub's privacy statement</a
+        >.
+      </p>
+
+      <h2>The website</h2>
+      <p>
+        The PunyGuard website is a static page hosted on GitHub Pages. Its Unicode inspector runs
+        entirely in your browser; what you type is not sent anywhere. The site uses no analytics or
+        cookies. GitHub, as the host, may process standard request data such as IP addresses under
+        its own privacy statement.
+      </p>
+
+      <h2>Children</h2>
+      <p>PunyGuard does not knowingly collect data from anyone, including children under 13.</p>
+
+      <h2>Changes</h2>
+      <p>
+        Changes to this policy are published at this address and in
+        <a href="https://github.com/0xdolan/PunyGuard/blob/main/PRIVACY.md">PRIVACY.md</a>, with a
+        new effective date, and listed in the
+        <a href="https://github.com/0xdolan/PunyGuard/blob/main/CHANGELOG.md">changelog</a>.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy: open an issue at
+        <a href="https://github.com/0xdolan/PunyGuard/issues">github.com/0xdolan/PunyGuard/issues</a
+        >. Security reports: see
+        <a href="https://github.com/0xdolan/PunyGuard/blob/main/SECURITY.md">SECURITY.md</a>.
+      </p>
+    </main>
+  </body>
+</html>

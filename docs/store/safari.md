@@ -29,7 +29,7 @@ Safari extensions ship inside a small macOS app. Shared text and assets are in [
    | Bundle ID        | `io.github.0xdolan.PunyGuard` |
    | SKU              | `punyguard`                   |
 
-2. **App Information**: category **Utilities** (secondary: Productivity), privacy policy URL https://github.com/0xdolan/PunyGuard/blob/main/PRIVACY.md.
+2. **App Information**: category **Utilities** (secondary: Productivity), privacy policy URL https://0xdolan.github.io/PunyGuard/privacy.html.
 3. **App Privacy** → Get Started → **No, we do not collect data from this app**. The label shows "Data Not Collected".
 4. **Pricing**: Free.
 5. **macOS App version** page:

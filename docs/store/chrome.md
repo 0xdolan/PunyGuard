@@ -35,7 +35,7 @@ Covers Chrome, Brave, Opera, and Vivaldi (they install from the Chrome Web Store
    | Are you using remote code?    | **No.** All code is bundled in the package.                                                                                     |
    | Data usage                    | Tick nothing: PunyGuard collects none of the listed data types.                                                                 |
    | Certifications                | Tick all three (no selling, no unrelated use, no creditworthiness use).                                                         |
-   | Privacy policy URL            | https://github.com/0xdolan/PunyGuard/blob/main/PRIVACY.md                                                                       |
+   | Privacy policy URL            | https://0xdolan.github.io/PunyGuard/privacy.html                                                                                |
 
 4. **Distribution**: Public, all regions.
 5. **Submit for review.** Access to all sites means an in-depth review; expect a few days.
