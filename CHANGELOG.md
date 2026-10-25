@@ -6,6 +6,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- Docs link in the popup footer and a Documentation button on the settings page, opening the PunyGuard guide
+
 ## [0.1.1] - 2026-10-24
 
 ### Added

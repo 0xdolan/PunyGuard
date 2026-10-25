@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { ExternalLink, Moon, Sun, Monitor } from 'lucide-react';
+import { BookOpen, ExternalLink, Moon, Sun, Monitor } from 'lucide-react';
 import { DEFAULT_SETTINGS, getSettings, saveSettings, type PunyGuardSettings } from '@/lib/storage';
 import { applyTheme } from '@/lib/theme';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
-import { openAnalyzer, SITE_URL, REPO_URL } from '@/lib/utils';
+import { DOCS_URL, openAnalyzer, SITE_URL, REPO_URL } from '@/lib/utils';
 import { APP_VERSION } from '@/lib/version';
 
 export default function App() {
@@ -119,6 +119,10 @@ export default function App() {
           <Button type="button" variant="outline" onClick={() => window.open(SITE_URL, '_blank')}>
             <ExternalLink />
             Project site
+          </Button>
+          <Button type="button" variant="outline" onClick={() => window.open(DOCS_URL, '_blank')}>
+            <BookOpen />
+            Documentation
           </Button>
           <Button type="button" variant="ghost" onClick={() => window.open(REPO_URL, '_blank')}>
             Source
