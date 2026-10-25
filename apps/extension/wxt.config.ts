@@ -13,7 +13,8 @@ export default defineConfig({
     // AMO reviewers rebuild from this zip, so it must hold the whole pnpm workspace
     // (packages/core, lockfile), not just this app. Build: see README "Develop".
     sourcesRoot: resolve(__dirname, '../..'),
-    includeSources: ['.nvmrc'],
+    // Since WXT 0.21 this is the full include list, not extra files; dotfiles need naming.
+    includeSources: ['**/*', '.nvmrc'],
     excludeSources: [
       '.agents/**',
       '.github/**',
@@ -21,6 +22,7 @@ export default defineConfig({
       'apps/extension/safari/**',
       'assets/**',
       'docs/**',
+      'release/**',
       'skills-lock.json',
       '**/.output/**',
       '**/.wxt/**',

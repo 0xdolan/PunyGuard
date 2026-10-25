@@ -103,6 +103,19 @@ for (const a of assets) {
 }
 if (errors.length) fail(errors);
 
+// AMO reviewers rebuild from the sources zip, so it must hold the whole workspace.
+// Zip entry names are stored uncompressed, so a byte search finds them.
+const sourcesZip = resolve(DIST, name('sources.zip'));
+const sourcesBytes = readFileSync(sourcesZip);
+const missingSources = [
+  'pnpm-lock.yaml',
+  'packages/core/package.json',
+  'apps/extension/wxt.config.ts',
+]
+  .filter((f) => !sourcesBytes.includes(f))
+  .map((f) => `${sourcesZip} is missing ${f} (check zip.includeSources in wxt.config.ts)`);
+if (missingSources.length) fail(missingSources);
+
 const shipped = assets.filter((a) => !a.missing);
 const sums = shipped
   .map(
