@@ -37,6 +37,14 @@ Attackers register domains that look identical to brands you trust by swapping L
 - Light and dark themes
 - GPL-3.0 open source
 
+## Screenshots
+
+| Page scan                                                                                                                                                                                                  | Domain inspector                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![The popup flags four lookalike domains on a page in red](assets/store/screenshots/chrome-1280x800-01-page-scan.png)](assets/store/screenshots/chrome-1280x800-01-page-scan.png)                         | [![The inspector shows that xn--mzn-5cdb9f.com displays as amazon.com with three Cyrillic letters](assets/store/screenshots/chrome-1280x800-02-inspect.png)](assets/store/screenshots/chrome-1280x800-02-inspect.png) |
+| **Unicode analyzer**                                                                                                                                                                                       | **Private by design**                                                                                                                                                                                                 |
+| [![The analyzer shows the Unicode and ASCII forms of a domain and why it was flagged](assets/store/screenshots/chrome-1280x800-03-analyzer.png)](assets/store/screenshots/chrome-1280x800-03-analyzer.png) | [![The settings page; all checks run on your device](assets/store/screenshots/chrome-1280x800-04-private.png)](assets/store/screenshots/chrome-1280x800-04-private.png)                                               |
+
 ## Learn: the PunyGuard guide
 
 A tutorial-style course in [docs/](docs/README.md), from first principles to how the engine works, with runnable examples:
