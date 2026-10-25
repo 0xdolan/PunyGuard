@@ -6,6 +6,22 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-24
+
+### Added
+
+- Privacy policy ([PRIVACY.md](PRIVACY.md)), store listing texts, and store screenshots for the Chrome Web Store, Edge Add-ons, addons.mozilla.org, and the Mac App Store
+
+### Fixed
+
+- A lookalike domain found both as a link and in page text was listed and counted twice
+- `xn--` in domain names was drawn with a dash instead of two hyphens, because of a font ligature
+- The inspector's non-ASCII and homoglyph counts for an `xn--` domain now describe its Unicode form, matching the verdict
+
+### Removed
+
+- The unused `scripting` and `activeTab` permissions; the extension now asks only for `storage`, `tabs`, and access to the sites you visit
+
 ## [0.2.0] - 2026-10-24
 
 ### Added
@@ -70,7 +86,8 @@ First public release.
 - Minified script text such as `t.substr(0,e)+"…"}function` is no longer reported as a hostname
 - Lookalike domains inside JavaScript strings are extracted without surrounding quotes
 
-[Unreleased]: https://github.com/0xdolan/PunyGuard/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/0xdolan/PunyGuard/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/0xdolan/PunyGuard/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/0xdolan/PunyGuard/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/0xdolan/PunyGuard/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/0xdolan/PunyGuard/compare/v0.0.2...v0.1.0
