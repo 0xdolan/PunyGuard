@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { getSettings, saveSettings, type PunyGuardSettings } from '@/lib/storage';
 import { applyTheme } from '@/lib/theme';
-import { openAnalyzer, REPO_URL, SITE_URL } from '@/lib/utils';
+import { DOCS_URL, openAnalyzer, REPO_URL, SITE_URL } from '@/lib/utils';
 import { APP_VERSION } from '@/lib/version';
 
 const CharInspector = lazy(() =>
@@ -161,6 +161,10 @@ export default function App() {
         <span aria-hidden>·</span>
         <a className="hover:underline" href={REPO_URL} target="_blank" rel="noreferrer">
           Source
+        </a>
+        <span aria-hidden>·</span>
+        <a className="hover:underline" href={DOCS_URL} target="_blank" rel="noreferrer">
+          Docs
         </a>
         <span aria-hidden>·</span>
         <a

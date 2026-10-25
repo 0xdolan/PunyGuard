@@ -8,6 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export const SITE_URL = 'https://0xdolan.github.io/PunyGuard/';
 export const ANALYZER_SITE = 'https://0xdolan.github.io/PunyGuard/#/inspect';
 export const REPO_URL = 'https://github.com/0xdolan/PunyGuard';
+export const DOCS_URL = `${REPO_URL}/blob/main/docs/README.md`;
 
 export function openAnalyzer(domain?: string) {
   const q = domain ? `?domain=${encodeURIComponent(domain)}` : '';
