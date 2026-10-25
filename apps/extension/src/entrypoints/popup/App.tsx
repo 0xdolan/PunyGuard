@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { ExternalLink, Heart, Settings2 } from 'lucide-react';
+import { ExternalLink, Heart, Monitor, Moon, Settings2, Sun } from 'lucide-react';
 import type { ScanResult } from '@punyguard/core';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -14,6 +14,9 @@ const CharInspector = lazy(() =>
 );
 
 type Tab = 'page' | 'inspect';
+
+const THEME_ORDER: PunyGuardSettings['theme'][] = ['system', 'light', 'dark'];
+const THEME_ICONS = { system: Monitor, light: Sun, dark: Moon } as const;
 
 export default function App() {
   const [settings, setSettings] = useState<PunyGuardSettings | null>(null);
@@ -57,6 +60,17 @@ export default function App() {
     await browser.runtime.sendMessage({ type: 'TOGGLE_ENABLED', enabled });
   }
 
+  async function cycleTheme() {
+    if (!settings) return;
+    const theme = THEME_ORDER[(THEME_ORDER.indexOf(settings.theme) + 1) % THEME_ORDER.length];
+    const next = await saveSettings({ theme });
+    setSettings(next);
+    applyTheme(next.theme);
+  }
+
+  const theme = settings?.theme ?? 'system';
+  const ThemeIcon = THEME_ICONS[theme];
+
   return (
     <div className="popup-shell flex flex-col bg-background text-foreground">
       <header className="flex items-center gap-3 border-b border-border px-4 py-3">
@@ -72,6 +86,16 @@ export default function App() {
           onCheckedChange={(v) => void toggleEnabled(v)}
           aria-label="Enable PunyGuard"
         />
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-sm"
+          aria-label={`Theme: ${theme}. Switch theme`}
+          title={`Theme: ${theme}`}
+          onClick={() => void cycleTheme()}
+        >
+          <ThemeIcon />
+        </Button>
         <Button
           type="button"
           variant="ghost"
