@@ -3,7 +3,7 @@
 **Local-first protection against IDN homograph attacks, lookalike domains, and phishing script spoofing.**
 
 [![CI](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-0.2.0-FF1A1A)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.2.1-FF1A1A)](CHANGELOG.md)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Site](https://img.shields.io/badge/site-GitHub%20Pages-111111)](https://0xdolan.github.io/PunyGuard/)
 
@@ -73,9 +73,10 @@ Every check runs locally. PunyGuard makes no network requests during analysis an
 | Permission                 | Why it is needed                                                     |
 | -------------------------- | -------------------------------------------------------------------- |
 | `<all_urls>` (host access) | Read the hostnames of links, scripts, and iframes on pages you visit |
-| `tabs`, `activeTab`        | Know which page the popup and toolbar badge belong to                |
-| `scripting`                | Run the page scanner                                                 |
-| `storage`                  | Save your settings                                                   |
+| `tabs`                     | Know which page the popup and toolbar badge belong to                |
+| `storage`                  | Save your settings and the current tab's scan results                |
+
+Full policy: [PRIVACY.md](PRIVACY.md).
 
 ## Stack
 
@@ -128,7 +129,8 @@ apps/
 packages/
   core/           Detection engine shared by extension and site
 assets/brand/     Brand mark source files
-docs/             Unicode security guide, runnable examples, maintainer docs
+assets/store/     Store screenshots, promo tiles, and icons
+docs/             Unicode security guide, examples, store listing kit, maintainer docs
 scripts/          Version, changelog, and dash checks
 .github/          CI/CD & Pages workflows
 ```
