@@ -125,3 +125,44 @@ jobs:
             --approval-timeout 0 \
             --api-key "$AMO_JWT_ISSUER" --api-secret "$AMO_JWT_SECRET" \
             --artifacts-dir "$RUNNER_TEMP/amo"
+
+  # Uploads the version to the Chrome Web Store item and submits it for review.
+  # Needs the CWS_* secrets (see docs/store/chrome.md, "Automatic updates");
+  # without them this job only reports that it was skipped.
+  publish-chrome:
+    name: Publish to the Chrome Web Store
+    needs: release
+    if: ${{ !contains(github.ref_name, '-') }}
+    runs-on: ubuntu-latest
+    env:
+      CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+      REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+      PUBLISHER_ID: ${{ secrets.CWS_PUBLISHER_ID }}
+      EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
+    steps:
+      - name: Check for Chrome Web Store credentials
+        id: creds
+        run: |
+          if [ -n "$CLIENT_ID" ] && [ -n "$CLIENT_SECRET" ] && [ -n "$REFRESH_TOKEN" ] \
+            && [ -n "$PUBLISHER_ID" ] && [ -n "$EXTENSION_ID" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::CWS_* secrets not set; skipping the Chrome Web Store upload."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.creds.outputs.ok == 'true'
+      - uses: ./.github/actions/setup
+        if: steps.creds.outputs.ok == 'true'
+
+      - name: Build Chrome package
+        if: steps.creds.outputs.ok == 'true'
+        run: pnpm zip
+
+      - name: Upload and submit for review
+        if: steps.creds.outputs.ok == 'true'
+        run: |
+          V="${GITHUB_REF_NAME#v}"
+          npx --yes chrome-webstore-upload-cli@4.0.2 \
+            --source "apps/extension/.output/punyguard-$V-chrome.zip"
