@@ -42,7 +42,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@vitejs/plugin-react": "^4.5.2"
+      "@vitejs/plugin-react": "^4.5.2",
+      "postcss-selector-parser": "^7.1.6"
     }
   },
   "engines": {
