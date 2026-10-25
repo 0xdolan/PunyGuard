@@ -76,7 +76,7 @@ Prereleases use `x.y.z-beta.N` (or `-rc.N`). Stores only accept dotted numbers, 
    git push origin vx.y.z
    ```
 
-6. The **Release** workflow runs full CI, checks the tag against `package.json` and the changelog, builds every package (the Safari Xcode project on a macOS runner), and creates a **draft** GitHub Release. Its notes are the changelog section plus a downloads table. Review it and click **Publish release**. If the AMO secrets are set, it also submits the version to addons.mozilla.org.
+6. The **Release** workflow runs full CI, checks the tag against `package.json` and the changelog, builds every package (the Safari Xcode project on a macOS runner), and creates a **draft** GitHub Release. Its notes are the changelog section plus a downloads table. Review it and click **Publish release**. If the store secrets are set, it also submits the version to addons.mozilla.org and the Chrome Web Store.
 7. Merge `main` back into `develop`.
 8. Upload the store packages from the release (see the table below).
 
@@ -105,6 +105,10 @@ With the repository secrets `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` set (API keys 
 
 The `.xpi` attached to the GitHub Release stays unsigned; Firefox users should install from AMO.
 
+### Publishing to the Chrome Web Store automatically
+
+With the repository secrets `CWS_CLIENT_ID`, `CWS_CLIENT_SECRET`, `CWS_REFRESH_TOKEN`, `CWS_PUBLISHER_ID`, and `CWS_EXTENSION_ID` set, the Release workflow's **Publish to the Chrome Web Store** job uploads each stable tag's Chrome package and submits it for review. Without the secrets the job is skipped. Setup: [store/chrome.md](store/chrome.md#automatic-updates-for-new-versions).
+
 ### Store links
 
 When a store listing goes live, set its URL in `apps/site/src/downloads.ts` (the `store` field). The site's button for that browser then opens the store instead of the release.
@@ -121,7 +125,7 @@ These are configured on `0xdolan/PunyGuard`; recreate them if you fork or move t
 6. **Ruleset "Protect release tags"**: `v*` tags cannot be moved or deleted once pushed (creating them is allowed).
 7. **Merging**: branches are deleted automatically after merge.
 8. **Security**: secret scanning with push protection and private vulnerability reporting (see [SECURITY.md](../SECURITY.md)). Dependabot is turned off (no config, no security update PRs, no alerts); update dependencies by hand and check them with `pnpm audit`.
-9. **Optional secrets**: `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` to submit each release to addons.mozilla.org.
+9. **Optional secrets**: `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` to submit each release to addons.mozilla.org; the five `CWS_*` secrets to submit it to the Chrome Web Store.
 
 ## Previewing GitHub Pages locally
 

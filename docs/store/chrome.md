@@ -48,6 +48,30 @@ Covers Chrome, Brave, Opera, and Vivaldi (they install from the Chrome Web Store
 
 Set the listing URL in the `store` field for `chrome` (and `brave`) in [apps/site/src/downloads.ts](../../apps/site/src/downloads.ts) and add it to the README's Install section.
 
+## Automatic updates for new versions
+
+After the first version is approved, every release tag can upload and submit itself. The **Publish to the Chrome Web Store** job in the Release workflow does it with [chrome-webstore-upload-cli](https://github.com/fregante/chrome-webstore-upload-cli). One-time setup, about 10 minutes:
+
+1. **Google Cloud project**: open https://console.cloud.google.com/apis/credentials and create a project (any name, for example `chrome-webstore-upload`).
+2. **Enable the API**: open https://console.cloud.google.com/apis/library/chromewebstore.googleapis.com and click **Enable**.
+3. **OAuth consent screen**: open https://console.cloud.google.com/auth/overview, click **Get started**, enter an app name and your email.
+   - With a personal Gmail account choose **External** (Internal is only for Google Workspace).
+   - Then go to **Audience** and click **Publish app** so it is "In production". In "Testing" status Google expires the refresh token after 7 days and uploads start failing.
+4. **OAuth client**: **Clients** → **Create client** → type **Desktop app** → **Create**. Copy the **Client ID** and **Client secret**.
+5. **Refresh token**: run `npx chrome-webstore-upload-keys`, paste the client ID and secret, and approve access in the browser window it opens (Google may warn that the app is unverified; it is your own app, so continue). Copy the refresh token it prints.
+6. **Publisher ID and extension ID**: open the item in the developer dashboard. The address looks like `https://chrome.google.com/webstore/devconsole/<publisher-id>/<extension-id>/edit`.
+7. **Repository secrets**:
+
+   ```bash
+   gh secret set CWS_CLIENT_ID
+   gh secret set CWS_CLIENT_SECRET
+   gh secret set CWS_REFRESH_TOKEN
+   gh secret set CWS_PUBLISHER_ID
+   gh secret set CWS_EXTENSION_ID
+   ```
+
+From then on, pushing a `vX.Y.Z` tag uploads `punyguard-x.y.z-chrome.zip` and submits it for review. Prerelease tags are not submitted. An upload fails while a previous version is still in review; wait for that review, then re-run the job. Without the secrets, the job is skipped with a notice.
+
 ## Updates
 
 Upload the new `chrome.zip` from each release under **Package** → **Upload new package**, then submit.
