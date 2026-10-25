@@ -32,9 +32,21 @@ Sign in at https://addons.mozilla.org/developers/ with a Mozilla account (free).
 
 Already handled in the manifest: the add-on ID `punyguard@0xdolan` and `data_collection_permissions: none`, which Firefox 140+ requires for new add-ons.
 
-## Listed versus unlisted signing
+## Automatic updates for new versions
 
-The release workflow can sign an **unlisted** `.xpi` when the `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` secrets exist. AMO allows each version number only once, so do not sign a version as unlisted if you will submit it as listed. Once PunyGuard is listed on AMO, leave those secrets unset.
+After the first version is listed, every release tag submits itself to AMO:
+
+1. Create an API key at https://addons.mozilla.org/developers/addon/api/key/ (the "JWT issuer" and "JWT secret").
+2. Add them as repository secrets:
+
+   ```bash
+   gh secret set AMO_JWT_ISSUER   # paste the JWT issuer
+   gh secret set AMO_JWT_SECRET   # paste the JWT secret
+   ```
+
+3. From then on, pushing a `vX.Y.Z` tag runs the **Publish to addons.mozilla.org** job in the Release workflow. It builds the Firefox package, uploads it with the sources zip and the version's changelog section as release notes, and Mozilla reviews and publishes it as usual. Prerelease tags (with a `-`) are not submitted.
+
+AMO accepts each version number only once, so a re-run of the job for a version that was already submitted fails; that is expected. Without the secrets, the job is skipped with a notice.
 
 ## After approval
 

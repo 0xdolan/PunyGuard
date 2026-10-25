@@ -76,7 +76,7 @@ Prereleases use `x.y.z-beta.N` (or `-rc.N`). Stores only accept dotted numbers, 
    git push origin vx.y.z
    ```
 
-6. The **Release** workflow runs full CI, checks the tag against `package.json` and the changelog, builds every package (the Safari Xcode project on a macOS runner), and creates a **draft** GitHub Release. Its notes are the changelog section plus a downloads table. Review it and click **Publish release**.
+6. The **Release** workflow runs full CI, checks the tag against `package.json` and the changelog, builds every package (the Safari Xcode project on a macOS runner), and creates a **draft** GitHub Release. Its notes are the changelog section plus a downloads table. Review it and click **Publish release**. If the AMO secrets are set, it also submits the version to addons.mozilla.org.
 7. Merge `main` back into `develop`.
 8. Upload the store packages from the release (see the table below).
 
@@ -99,9 +99,11 @@ Each release ships one package per browser, so the site's download buttons and t
 
 Rehearse a release locally with `pnpm release:stage`. It builds every package into `release/` with checksums and the notes the workflow would publish (the Xcode project only builds on macOS).
 
-### Signing the Firefox package (optional)
+### Publishing to addons.mozilla.org automatically
 
-Unsigned `.xpi` files only install temporarily in regular Firefox. To ship a signed one that installs with a click, create API keys at https://addons.mozilla.org/developers/addon/api/key/ and add them as repository secrets named `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` (_Settings → Secrets and variables → Actions_). The release workflow then signs the `.xpi` as an unlisted add-on before publishing. Without the secrets, the step is skipped and the notes explain how to install the unsigned file.
+With the repository secrets `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` set (API keys from https://addons.mozilla.org/developers/addon/api/key/), the Release workflow's **Publish to addons.mozilla.org** job submits each stable tag to the listed add-on, with the sources zip and the changelog section as release notes. Mozilla then reviews and publishes it. Without the secrets the job is skipped. See [store/firefox.md](store/firefox.md#automatic-updates-for-new-versions).
+
+The `.xpi` attached to the GitHub Release stays unsigned; Firefox users should install from AMO.
 
 ### Store links
 
@@ -119,7 +121,7 @@ These are configured on `0xdolan/PunyGuard`; recreate them if you fork or move t
 6. **Ruleset "Protect release tags"**: `v*` tags cannot be moved or deleted once pushed (creating them is allowed).
 7. **Merging**: branches are deleted automatically after merge.
 8. **Security**: secret scanning with push protection and private vulnerability reporting (see [SECURITY.md](../SECURITY.md)). Dependabot is turned off (no config, no security update PRs, no alerts); update dependencies by hand and check them with `pnpm audit`.
-9. **Optional secrets**: `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` to sign the Firefox package.
+9. **Optional secrets**: `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` to submit each release to addons.mozilla.org.
 
 ## Previewing GitHub Pages locally
 
