@@ -6,6 +6,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Fixed
+
+- Popup showed "No active page" and zero counts while the badge reported a risk, because per-tab results were lost when the MV3 background was unloaded; results now persist in session storage
+- Iframe scans no longer overwrite the top page's result, and the load-complete scan no longer replaces the content script's fuller scan
+
 ## [0.0.2] - 2026-10-24
 
 First public release.
