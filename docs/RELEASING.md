@@ -118,7 +118,7 @@ These are configured on `0xdolan/PunyGuard`; recreate them if you fork or move t
 5. **Ruleset "Protect main"** (_Settings → Rules → Rulesets_): no deletion, no force push, changes through a pull request, and these required checks: `Lint · Typecheck · Test`, `Build (chrome)`, `Build (edge)`, `Build (firefox)`, `Build (safari)`, `Safari Xcode project`, `Build site`.
 6. **Ruleset "Protect release tags"**: `v*` tags cannot be moved or deleted once pushed (creating them is allowed).
 7. **Merging**: branches are deleted automatically after merge.
-8. **Security**: Dependabot alerts and security updates, secret scanning with push protection, and private vulnerability reporting (see [SECURITY.md](../SECURITY.md)). Dependabot skips npm major versions; do those upgrades by hand.
+8. **Security**: secret scanning with push protection and private vulnerability reporting (see [SECURITY.md](../SECURITY.md)). Dependabot is turned off (no config, no security update PRs, no alerts); update dependencies by hand and check them with `pnpm audit`.
 9. **Optional secrets**: `AMO_JWT_ISSUER` and `AMO_JWT_SECRET` to sign the Firefox package.
 
 ## Previewing GitHub Pages locally

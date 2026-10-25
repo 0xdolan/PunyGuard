@@ -6,6 +6,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-24
+
+### Added
+
+- A tutorial guide in `docs/` covering ASCII, Unicode, encoding and decoding, escapes, invisible characters, normalization, confusables, bidirectional text, IDN and Punycode, homograph attacks, invisible code in source and config, and how PunyGuard's engine works, with a Unicode scanner, an invisible-text codec, and a pre-commit hook in `docs/examples/`
+
+### Changed
+
+- The logo on the site, favicon, and README is the transparent mark; no black-background logo is used anywhere
+
 ## [0.1.0] - 2026-10-24
 
 ### Added
@@ -54,6 +64,7 @@ First public release.
 - Minified script text such as `t.substr(0,e)+"…"}function` is no longer reported as a hostname
 - Lookalike domains inside JavaScript strings are extracted without surrounding quotes
 
-[Unreleased]: https://github.com/0xdolan/PunyGuard/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/0xdolan/PunyGuard/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/0xdolan/PunyGuard/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/0xdolan/PunyGuard/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/0xdolan/PunyGuard/releases/tag/v0.0.2

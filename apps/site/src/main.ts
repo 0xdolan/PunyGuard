@@ -28,7 +28,7 @@ function homePage() {
   <div class="min-h-screen bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(255,26,26,0.25),transparent)]">
     <header class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-5 sm:px-6">
       <a href="#/" class="flex items-center gap-2.5 font-extrabold tracking-tight">
-        <img src="${base}logo-192.png" alt="" class="h-8 w-8 rounded-lg" />
+        <img src="${base}logo-192.png" alt="" class="h-8 w-8" />
         <span>PunyGuard</span>
       </a>
       <nav class="flex flex-wrap items-center gap-3 text-sm text-[var(--muted)]">
@@ -50,7 +50,7 @@ function homePage() {
           </div>
         </div>
         <div class="flex justify-center">
-          <img src="${base}logo-512.png" alt="PunyGuard" class="h-48 w-48 rounded-3xl md:h-60 md:w-60" />
+          <img src="${base}logo-512.png" alt="PunyGuard" class="h-48 w-48 md:h-60 md:w-60" />
         </div>
       </section>
 
@@ -84,7 +84,7 @@ function inspectPage(domain: string) {
     <header class="sticky top-0 z-10 border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur">
       <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-4 py-3 sm:px-6">
         <a href="#/" class="flex items-center gap-2 font-bold">
-          <img src="${base}logo-192.png" alt="" class="h-7 w-7 rounded-md" />
+          <img src="${base}logo-192.png" alt="" class="h-7 w-7" />
           PunyGuard
         </a>
         <span class="text-sm text-[var(--muted)]">Unicode inspector</span>

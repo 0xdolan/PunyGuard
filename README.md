@@ -3,7 +3,7 @@
 **Local-first protection against IDN homograph attacks, lookalike domains, and phishing script spoofing.**
 
 [![CI](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/0xdolan/PunyGuard/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/badge/version-0.1.0-FF1A1A)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.1.1-FF1A1A)](CHANGELOG.md)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Site](https://img.shields.io/badge/site-GitHub%20Pages-111111)](https://0xdolan.github.io/PunyGuard/)
 
@@ -36,6 +36,18 @@ Attackers register domains that look identical to brands you trust by swapping L
 - Popup with page results and an Inspect tab, plus a settings page (on/off, badge, iframe scanning, theme)
 - Light and dark themes
 - GPL-3.0 open source
+
+## Learn: the PunyGuard guide
+
+A tutorial-style course in [docs/](docs/README.md), from first principles to how the engine works, with runnable examples:
+
+1. **Foundations**: [bits and bytes](docs/guide/01-foundations/01-bits-bytes-and-numbers.md), [ASCII](docs/guide/01-foundations/02-ascii.md), [Unicode](docs/guide/01-foundations/03-unicode.md), [encoding and decoding](docs/guide/01-foundations/04-encoding-and-decoding.md), [escapes](docs/guide/01-foundations/05-escapes-and-representations.md)
+2. **Tricky Unicode**: [invisible characters](docs/guide/02-tricky-unicode/01-invisible-characters.md) (zero-width, Hangul fillers, Private Use Area, tags, fullwidth forms), [normalization](docs/guide/02-tricky-unicode/02-normalization.md), [confusables and scripts](docs/guide/02-tricky-unicode/03-confusables-and-scripts.md), [bidirectional text](docs/guide/02-tricky-unicode/04-bidirectional-text.md)
+3. **Domains**: [how domain names work](docs/guide/03-domains/01-domain-names.md), [IDN and Punycode](docs/guide/03-domains/02-idn-and-punycode.md), [homograph attacks](docs/guide/03-domains/03-homograph-attacks.md)
+4. **Invisible code**: [hiding data in invisible characters](docs/guide/04-invisible-code/01-hiding-data-in-invisible-characters.md), [attacks in source and config](docs/guide/04-invisible-code/02-attacks-in-source-and-config.md), [detection and defense](docs/guide/04-invisible-code/03-detection-and-defense.md)
+5. **How PunyGuard works**: [architecture](docs/guide/05-how-punyguard-works/01-architecture.md), [domain detection pipeline](docs/guide/05-how-punyguard-works/02-domain-detection-pipeline.md), [character inspector](docs/guide/05-how-punyguard-works/03-character-inspector.md), [limitations and roadmap](docs/guide/05-how-punyguard-works/04-limitations-and-roadmap.md)
+
+Plus a [glossary](docs/guide/glossary.md) and [examples](docs/examples/README.md): an invisible-text codec, a Unicode scanner, and a git pre-commit hook.
 
 ## Install
 
@@ -116,7 +128,7 @@ apps/
 packages/
   core/           Detection engine shared by extension and site
 assets/brand/     Brand mark source files
-docs/             Maintainer docs (releasing, GitHub setup)
+docs/             Unicode security guide, runnable examples, maintainer docs
 scripts/          Version, changelog, and dash checks
 .github/          CI/CD & Pages workflows
 ```
