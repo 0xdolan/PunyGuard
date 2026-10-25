@@ -83,8 +83,7 @@ The popup asks the background for the current tab's result and lists the hostnam
 | Permission               | Why                                                  |
 | ------------------------ | ---------------------------------------------------- |
 | `<all_urls>` host access | Run the content script on pages you visit            |
-| `tabs`, `activeTab`      | Know which tab a result belongs to; read the tab URL |
-| `scripting`              | Content script injection                             |
+| `tabs`                   | Know which tab a result belongs to; read the tab URL |
 | `storage`                | Settings and per-tab results                         |
 
 The engine has no network code. IDNA conversion, confusable lookup, and scoring are all local table lookups, which is why a full page scan typically takes a few milliseconds (the popup shows the time).

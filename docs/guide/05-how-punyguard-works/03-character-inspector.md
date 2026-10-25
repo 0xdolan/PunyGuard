@@ -8,7 +8,7 @@ For an input like `xn--mzn-5cdb9f.com`:
 
 1. **Domain verdict**: level, score, and reasons from the pipeline in [5.2](02-domain-detection-pipeline.md).
 2. **IDN card**: the Unicode and `xn--` forms side by side, with each label's conversion.
-3. **Character table**: one row per code point, sortable and filterable by every column.
+3. **Character table**: one row per code point, sortable and filterable by every column. An `xn--` input is shown in the Unicode form it displays as (`xn--mzn-5cdb9f.com` becomes the 10 characters of `аmаzоn.com`), so the counts and flags describe the lookalike itself.
 4. **Details drawer**: everything known about one character.
 
 ## Fields per character
