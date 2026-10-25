@@ -6,6 +6,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-24
+
 ### Added
 
 - Theme button next to settings in the popup that cycles System, Light, and Dark
@@ -19,6 +21,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Microsoft Edge download card shows the Edge logo instead of a generic globe
 - Popup showed "No active page" and zero counts while the badge reported a risk, because per-tab results were lost when the MV3 background was unloaded; results now persist in session storage
 - Iframe scans no longer overwrite the top page's result, and the load-complete scan no longer replaces the content script's fuller scan
+
+### Security
+
+- Updated build and test tooling (WXT 0.21, Vitest 4) to resolve dependency security alerts; the shipped extension code is unchanged by these updates
 
 ## [0.0.2] - 2026-10-24
 
@@ -48,5 +54,6 @@ First public release.
 - Minified script text such as `t.substr(0,e)+"…"}function` is no longer reported as a hostname
 - Lookalike domains inside JavaScript strings are extracted without surrounding quotes
 
-[Unreleased]: https://github.com/0xdolan/PunyGuard/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/0xdolan/PunyGuard/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/0xdolan/PunyGuard/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/0xdolan/PunyGuard/releases/tag/v0.0.2
