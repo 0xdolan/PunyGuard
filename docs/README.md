@@ -58,3 +58,5 @@ Every example on these pages was run and its output pasted in. The scripts in [e
 ## For maintainers
 
 - [Releasing](RELEASING.md): versions, changelog, tags, release packages, and GitHub setup.
+- [Store listing kit](store/README.md): paste-ready text, screenshots, and steps for the Chrome Web Store, Edge Add-ons, addons.mozilla.org, and the Mac App Store.
+- [Privacy policy](../PRIVACY.md)
