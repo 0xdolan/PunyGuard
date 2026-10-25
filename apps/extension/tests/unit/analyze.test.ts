@@ -55,6 +55,17 @@ describe('analyzeHostname', () => {
     expect(result.durationMs).toBeLessThan(25);
     expect(result.counts.total).toBeGreaterThan(0);
   });
+
+  it('counts a lookalike once whether seen in xn-- or Unicode form', () => {
+    const result = scanHostnames([
+      'xn--ggle-55da.com',
+      'g\u043e\u043egle.com',
+      'GITHUB.com',
+      'github.com',
+    ]);
+    expect(result.counts.total).toBe(2);
+    expect(result.counts.danger).toBe(1);
+  });
 });
 
 describe('character inspector', () => {
@@ -65,6 +76,14 @@ describe('character inspector', () => {
     expect(report.characters[0]?.name).toMatch(/LATIN SMALL LETTER L/i);
     expect(report.characters[0]?.block).toBe('Basic Latin');
     expect(report.characters[0]?.decimal).toBe(108);
+  });
+
+  it('analyzes an xn-- input in the Unicode form it displays as', () => {
+    const report = analyzeDomainCharacters('xn--mzn-5cdb9f.com');
+    expect(report.normalizedHost).toBe('xn--mzn-5cdb9f.com');
+    expect(report.characters.map((c) => c.char).join('')).toBe('\u0430m\u0430z\u043en.com');
+    expect(report.homoglyphCount).toBe(3);
+    expect(report.nonAsciiCount).toBe(3);
   });
 
   it('flags invisible characters', () => {

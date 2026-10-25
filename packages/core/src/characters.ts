@@ -1,6 +1,7 @@
 import unicodeProps from 'unicode-properties';
 import { CONFUSABLE_TO_LATIN } from './confusables';
 import { blockNameFor } from './blocks';
+import { decodeToUnicode, hasAcePrefix } from './idn';
 import { getCharacterName } from './names';
 
 export interface CharDetail {
@@ -254,7 +255,15 @@ export function analyzeDomainCharacters(raw: string): DomainCharReport {
     /* keep raw */
   }
 
-  const characters = analyzeString(host);
+  // An xn-- input is analyzed in the Unicode form a person would see, so the
+  // homoglyph and non-ASCII counts describe the lookalike, not its ASCII encoding.
+  let display = host;
+  if (hasAcePrefix(host)) {
+    const { unicode, error } = decodeToUnicode(host);
+    if (!error && unicode) display = unicode;
+  }
+
+  const characters = analyzeString(display);
   return {
     input: trimmed,
     normalizedHost: host || null,

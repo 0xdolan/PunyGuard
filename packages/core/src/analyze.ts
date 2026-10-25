@@ -224,7 +224,16 @@ export function analyzeHostname(rawHost: string): DomainThreat | null {
 
 export function scanHostnames(hosts: string[], pageHost?: string | null): ScanResult {
   const started = performance.now();
-  const unique = [...new Set(hosts.map((h) => normalizeHostname(h)).filter(Boolean) as string[])];
+  // One entry per real domain: a lookalike seen as a link (xn-- form) and in page
+  // text (Unicode form) is the same host, so key by the ASCII form.
+  const byAscii = new Map<string, string>();
+  for (const raw of hosts) {
+    const host = normalizeHostname(raw);
+    if (!host) continue;
+    const key = toAsciiHostname(host);
+    if (!byAscii.has(key)) byAscii.set(key, host);
+  }
+  const unique = [...byAscii.values()];
   const threats = unique
     .map(analyzeHostname)
     .filter((t): t is DomainThreat => t !== null)
