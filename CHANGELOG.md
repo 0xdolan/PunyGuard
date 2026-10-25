@@ -6,8 +6,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Added
+
+- Theme button next to settings in the popup that cycles System, Light, and Dark
+
+### Changed
+
+- Site header, hero, and inspector use the black-background PNG logo
+
 ### Fixed
 
+- Microsoft Edge download card shows the Edge logo instead of a generic globe
 - Popup showed "No active page" and zero counts while the badge reported a risk, because per-tab results were lost when the MV3 background was unloaded; results now persist in session storage
 - Iframe scans no longer overwrite the top page's result, and the load-complete scan no longer replaces the content script's fuller scan
 
