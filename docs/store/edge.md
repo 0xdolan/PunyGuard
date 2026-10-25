@@ -12,13 +12,13 @@ Register at https://partner.microsoft.com/dashboard/microsoftedge (free, Microso
 2. **Availability**: Public, all markets.
 3. **Properties**:
 
-   | Field           | Value                                                          |
-   | --------------- | -------------------------------------------------------------- |
-   | Category        | Productivity (Edge has no security category)                   |
-   | Privacy policy  | Yes: https://github.com/0xdolan/PunyGuard/blob/main/PRIVACY.md |
-   | Website         | https://0xdolan.github.io/PunyGuard/                           |
-   | Support contact | https://github.com/0xdolan/PunyGuard/issues                    |
-   | Mature content  | No                                                             |
+   | Field           | Value                                                 |
+   | --------------- | ----------------------------------------------------- |
+   | Category        | Productivity (Edge has no security category)          |
+   | Privacy policy  | Yes: https://0xdolan.github.io/PunyGuard/privacy.html |
+   | Website         | https://0xdolan.github.io/PunyGuard/                  |
+   | Support contact | https://github.com/0xdolan/PunyGuard/issues           |
+   | Mature content  | No                                                    |
 
 4. **Store listings** (English):
 

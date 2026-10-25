@@ -13,7 +13,7 @@ Everything needed to publish PunyGuard, with text ready to paste into each store
 
 | Asset                  | File                                                                                                      |
 | ---------------------- | --------------------------------------------------------------------------------------------------------- |
-| Privacy policy URL     | https://github.com/0xdolan/PunyGuard/blob/main/PRIVACY.md                                                 |
+| Privacy policy URL     | https://0xdolan.github.io/PunyGuard/privacy.html                                                          |
 | Homepage               | https://0xdolan.github.io/PunyGuard/                                                                      |
 | Support URL            | https://github.com/0xdolan/PunyGuard/issues                                                               |
 | Screenshots, 1280x800  | [assets/store/screenshots/chrome-1280x800-*.png](../../assets/store/screenshots/) (Chrome, Edge, Firefox) |

@@ -56,7 +56,7 @@ PunyGuard does not knowingly collect data from anyone, including children under 
 
 ## Changes
 
-Changes to this policy are published in this file, with a new effective date, and listed in the [changelog](CHANGELOG.md).
+Changes to this policy are published in this file and at https://0xdolan.github.io/PunyGuard/privacy.html (kept in sync, from `apps/site/public/privacy.html`), with a new effective date, and listed in the [changelog](CHANGELOG.md).
 
 ## Contact
 
