@@ -37,6 +37,18 @@ Attackers register domains that look identical to brands you trust by swapping L
 - Light and dark themes
 - GPL-3.0 open source
 
+## Learn: the PunyGuard guide
+
+A tutorial-style course in [docs/](docs/README.md), from first principles to how the engine works, with runnable examples:
+
+1. **Foundations**: [bits and bytes](docs/guide/01-foundations/01-bits-bytes-and-numbers.md), [ASCII](docs/guide/01-foundations/02-ascii.md), [Unicode](docs/guide/01-foundations/03-unicode.md), [encoding and decoding](docs/guide/01-foundations/04-encoding-and-decoding.md), [escapes](docs/guide/01-foundations/05-escapes-and-representations.md)
+2. **Tricky Unicode**: [invisible characters](docs/guide/02-tricky-unicode/01-invisible-characters.md) (zero-width, Hangul fillers, Private Use Area, tags, fullwidth forms), [normalization](docs/guide/02-tricky-unicode/02-normalization.md), [confusables and scripts](docs/guide/02-tricky-unicode/03-confusables-and-scripts.md), [bidirectional text](docs/guide/02-tricky-unicode/04-bidirectional-text.md)
+3. **Domains**: [how domain names work](docs/guide/03-domains/01-domain-names.md), [IDN and Punycode](docs/guide/03-domains/02-idn-and-punycode.md), [homograph attacks](docs/guide/03-domains/03-homograph-attacks.md)
+4. **Invisible code**: [hiding data in invisible characters](docs/guide/04-invisible-code/01-hiding-data-in-invisible-characters.md), [attacks in source and config](docs/guide/04-invisible-code/02-attacks-in-source-and-config.md), [detection and defense](docs/guide/04-invisible-code/03-detection-and-defense.md)
+5. **How PunyGuard works**: [architecture](docs/guide/05-how-punyguard-works/01-architecture.md), [domain detection pipeline](docs/guide/05-how-punyguard-works/02-domain-detection-pipeline.md), [character inspector](docs/guide/05-how-punyguard-works/03-character-inspector.md), [limitations and roadmap](docs/guide/05-how-punyguard-works/04-limitations-and-roadmap.md)
+
+Plus a [glossary](docs/guide/glossary.md) and [examples](docs/examples/README.md): an invisible-text codec, a Unicode scanner, and a git pre-commit hook.
+
 ## Install
 
 PunyGuard is not in the browser stores yet. Until it is, install a release build. You can also start from the [project site](https://0xdolan.github.io/PunyGuard/#get), which has a button per browser.
@@ -116,7 +128,7 @@ apps/
 packages/
   core/           Detection engine shared by extension and site
 assets/brand/     Brand mark source files
-docs/             Maintainer docs (releasing, GitHub setup)
+docs/             Unicode security guide, runnable examples, maintainer docs
 scripts/          Version, changelog, and dash checks
 .github/          CI/CD & Pages workflows
 ```
